@@ -17,15 +17,16 @@
 
 
     <com.google.android.material.card.MaterialCardView
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/loginCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_margin="12dp"
-        android:elevation="8dp">
-
+        android:theme="@style/Theme.MaterialComponents.DayNight.Bridge"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
         <View
             android:layout_width="match_parent"
             android:layout_height="5dp"
@@ -51,8 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_email"
-                android:drawableTint="@color/grey_500"
                 android:drawablePadding="10dp"
+                android:drawableTint="@color/grey_500"
                 android:hint="Enter Email"
                 android:inputType="text"
                 android:maxLines="1"
@@ -60,19 +61,18 @@
                 android:textSize="12sp" />
 
             <EditText
-                android:drawableTint="@color/grey_500"
                 android:id="@+id/ed_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:drawableStart="@drawable/ic_password"
                 android:drawablePadding="10dp"
+                android:drawableTint="@color/grey_500"
                 android:hint="Enter Password"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:padding="10dp"
                 android:textSize="12sp" />
-
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -88,32 +88,34 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="100dp"
                     android:text="Forgot Password?"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:textSize="12sp" />
-                <CheckBox
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <CheckBox
                     android:id="@+id/keep_in"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="8dp"
                     android:text="Remember Me"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <com.google.android.material.button.MaterialButton
-                android:layout_marginTop="8dp"
                 android:id="@+id/sign_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text="Sign In"
+                android:layout_marginTop="8dp"
                 android:backgroundTint="@color/primaryColor"
+                android:text="Sign In"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
 
