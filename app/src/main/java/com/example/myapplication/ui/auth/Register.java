@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.auth;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -10,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,13 +21,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class Register extends AppCompatActivity {
 
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://authentication-9c17d-default-rtdb.firebaseio.com");
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class Register extends AppCompatActivity {
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        mAuth = FirebaseAuth.getInstance();
+
 
         EditText fullname = findViewById(R.id.fullname);
         EditText email = findViewById(R.id.email);
@@ -44,57 +59,50 @@ public class Register extends AppCompatActivity {
                 if (nameTxt.isEmpty() || emailTxt.isEmpty() || passTxt.isEmpty()) {
                     Toast.makeText(Register.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
                 } else {
-                    databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                            if (snapshot.hasChild(emailTxt)) {
-                                Toast.makeText(Register.this, "Email is already registered.", Toast.LENGTH_SHORT).show();
-                            } else if (!passTxt.equals(conpassTxt)) {
-                                Toast.makeText(Register.this, "Passwords do not match.", Toast.LENGTH_SHORT).show();
-                            } else {
-                                databaseReference.child("users").child(emailTxt).child(emailTxt).setValue(emailTxt);
-                                databaseReference.child("users").child(passTxt).child(passTxt).setValue(passTxt);
-
-                                Toast.makeText(Register.this, "User Registered Successfully.", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-
+                    if (passTxt.equals(conpassTxt))
+                    {
+                        signUp(emailTxt, passTxt);
+                    }
+                    else
+                    {
+                        Toast.makeText(Register.this, "Passwords dont match", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }
-
-            public void checkUser() {
-                String userfullname = fullname.getText().toString().trim();
-                String userpassword = password.getText().toString().trim();
-                String useremail = email.getText().toString().trim();
-
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-                Query checkUserDatabase = reference.orderByChild("email").equalTo("useremail");
-
-                checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
-
         });
 
 
     }
+    public void signUp(String email, String password)
+    {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("TAG", "createUserWithEmail:success");
+                            Toast.makeText(Register.this, "createUserWithEmail:success", Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            // user.sendEmailVerification();
+                            // updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("TAG", "createUserWithEmail:failure", task.getException());
+                            // TODO : look into why it failed to give the user a better response
+                            Toast.makeText(Register.this, "createUserWithEmail:failure", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+    }
+
+    public Boolean runTextTests()
+    {
+        // TODO WIP : this function is to run tests on the text boxes to assure firebase runs smoothly
+       return true;
+    }
+
 }
