@@ -24,9 +24,10 @@
             android:padding="12dp">
 
             <TextView
+                android:id="@+id/txt.agreement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/agreement" />
+                />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
