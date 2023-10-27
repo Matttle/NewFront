@@ -12,146 +12,152 @@
         android:layout_marginStart="8dp"
         android:shadowColor="@color/primaryColorBlack"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.402" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="71dp"
-        android:layout_height="65dp"
-        android:text="Menu"
-        app:icon="@drawable/ic_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.914"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.101" />
-
-    <RadioButton
-        android:id="@+id/radioButton"
-        android:layout_width="110dp"
-        android:layout_height="45dp"
-        android:text="Start Time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.157" />
-
-    <RadioButton
-        android:id="@+id/radioButton2"
-        android:layout_width="110dp"
-        android:layout_height="45dp"
-        android:text="Pause Time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.157" />
+        app:layout_constraintVertical_bias="0.338" />
 
     <EditText
         android:id="@+id/editTextText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
         android:ems="10"
         android:inputType="text"
         android:text="Trip Information:"
         app:fontFamily="@font/bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintHorizontal_bias="0.039"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.74" />
+        app:layout_constraintVertical_bias="0.717" />
+
+    <RadioButton
+        android:id="@+id/radioButton"
+        android:layout_width="123dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="20dp"
+        android:text="Start Time"
+        android:textSize="20dp"
+        app:fontFamily="@font/bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.052" />
+
+    <RadioButton
+        android:id="@+id/radioButton2"
+        android:layout_width="109dp"
+        android:layout_height="58dp"
+        android:text="Pause Time"
+        android:textSize="20dp"
+        app:fontFamily="@font/bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.585"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.082" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="357dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="51dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Username"
+        app:fontFamily="@font/bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="232dp"
         android:layout_height="44dp"
         android:text="Hours Worked"
+        android:textSize="20dp"
         app:fontFamily="@font/bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintHorizontal_bias="0.039"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.804" />
+        app:layout_constraintVertical_bias="0.813" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="232dp"
         android:layout_height="43dp"
-        android:layout_marginTop="115dp"
         android:text="Miles Driven"
+        android:textSize="20dp"
         app:fontFamily="@font/bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.844" />
+        app:layout_constraintVertical_bias="0.897" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="232dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="154dp"
+        android:layout_width="231dp"
+        android:layout_height="45dp"
         android:text="Estimated Pay"
+        android:textSize="20dp"
         app:fontFamily="@font/bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92" />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="41dp"
-        android:layout_height="29dp"
-        android:layout_marginEnd="289dp"
-        android:layout_marginBottom="91dp"
-        app:layout_constraintBottom_toTopOf="@+id/text_dashboard"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.727"
-        app:srcCompat="@drawable/user" />
+        app:layout_constraintVertical_bias="0.973" />
 
     <RadioButton
         android:id="@+id/radioButton3"
-        android:layout_width="130dp"
-        android:layout_height="45dp"
+        android:layout_width="128dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="12dp"
         android:text="Lunch Break"
+        android:textSize="20dp"
         app:fontFamily="@font/bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.943"
+        app:layout_constraintHorizontal_bias="0.939"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.819" />
+        app:layout_constraintVertical_bias="0.841" />
 
     <RadioButton
         android:id="@+id/radioButton4"
-        android:layout_width="130dp"
-        android:layout_height="45dp"
+        android:layout_width="129dp"
+        android:layout_height="55dp"
         android:text="Sleep"
+        android:textSize="20dp"
         app:fontFamily="@font/bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.943"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
+        app:layout_constraintVertical_bias="0.933" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="51dp"
+        android:layout_height="38dp"
+        app:srcCompat="@drawable/baseline_menu_24"
+        tools:layout_editor_absoluteX="357dp"
+        tools:layout_editor_absoluteY="5dp" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
