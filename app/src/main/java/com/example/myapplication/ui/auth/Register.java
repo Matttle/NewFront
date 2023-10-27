@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.auth;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -86,6 +87,7 @@ public class Register extends AppCompatActivity {
                             Log.d("TAG", "createUserWithEmail:success");
                             Toast.makeText(Register.this, "createUserWithEmail:success", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
+                            startActivity(new Intent(Register.this, LoginActivity.class));
                             // user.sendEmailVerification();
                             // updateUI(user);
                         } else {

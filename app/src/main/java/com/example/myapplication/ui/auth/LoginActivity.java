@@ -32,12 +32,12 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        /*
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             reload();
         }
-         */
+
 
        EditText email = findViewById(R.id.email);
        EditText password = findViewById(R.id.password);
@@ -79,6 +79,10 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, Register.class));
             }
         });
+    }
+
+    private void reload() {
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
     }
 
     private void signIn(String email, String password) {
