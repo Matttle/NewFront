@@ -52,12 +52,12 @@
                 android:layout_height="74dp"
                 android:drawableStart="@drawable/ic_action_name"
                 android:drawablePadding="10dp"
-                android:drawableTint="@color/grey_500"
-                android:hint="First & Last Name"
+                android:hint="@string/first_amp_last_name2"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textSize="20dp"
-                app:fontFamily="@font/bold" />
+                android:textSize="20sp"
+                app:fontFamily="@font/bold"
+                android:autofillHints="" />
 
 
             <EditText
@@ -66,12 +66,12 @@
                 android:layout_height="71dp"
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="10dp"
-                android:drawableTint="@color/grey_500"
                 android:hint="@string/fui_email_hint"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:textSize="20dp"
-                app:fontFamily="@font/bold" />
+                android:textSize="20sp"
+                app:fontFamily="@font/bold"
+                android:autofillHints="" />
 
             <EditText
                 android:id="@+id/password"
@@ -80,12 +80,12 @@
                 android:layout_marginTop="12dp"
                 android:drawableStart="@drawable/ic_password"
                 android:drawablePadding="10dp"
-                android:drawableTint="@color/grey_500"
                 android:hint="@string/enter_password"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:textSize="20dp"
-                app:fontFamily="@font/bold" />
+                android:textSize="20sp"
+                app:fontFamily="@font/bold"
+                android:autofillHints="" />
 
             <EditText
                 android:id="@+id/conpassword"
@@ -94,57 +94,12 @@
                 android:layout_marginTop="12dp"
                 android:drawableStart="@drawable/ic_password"
                 android:drawablePadding="10dp"
-                android:drawableTint="@color/grey_500"
                 android:hint="@string/enter_password"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:textSize="20dp"
-                app:fontFamily="@font/bold" />
-
-
-            <!-- <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/to_reset"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="100dp"
-                    android:text="Forgot Password?"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <CheckBox
-                    android:id="@+id/keep_in"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Remember Me"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-            <!--<com.google.android.material.button.MaterialButton
-                android:id="@+id/sign_in"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@color/primaryColor"
-                android:text="Sign In"
-                android:textColor="@color/white"
-                android:textSize="12sp" />-->
+                android:textSize="20sp"
+                app:fontFamily="@font/bold"
+                android:autofillHints="" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -161,7 +116,7 @@
         android:background="@drawable/btn_create_account"
         android:clickable="true"
         android:gravity="center"
-        android:text="CREATE ACCOUNT"
+        android:text="@string/create_account3"
         android:textColor="@color/grey_500"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -170,6 +125,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginCard"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintVertical_bias="0.333"
+        android:focusable="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
