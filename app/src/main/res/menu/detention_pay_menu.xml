@@ -2,17 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:icon="@drawable/ic_user"
-        android:title="Profile"
+        android:title="@string/profile"
         app:showAsAction="ifRoom" />
     <item
         android:icon="@drawable/ic_menu"
-        android:title="Menu"
+        android:title="@string/menu"
         app:showAsAction="ifRoom">
         <menu>
-            <item android:title="Menu Action 1" />
-            <item android:title="Menu Action 2" />
-            <item android:title="Menu Action 3" />
+            <item android:title="@string/menu_action_1" />
+            <item android:title="@string/menu_action_2" />
+            <item android:title="@string/menu_action_3" />
         </menu>
     </item>
 

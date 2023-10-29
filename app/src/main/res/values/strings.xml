@@ -13,4 +13,13 @@
     <string name="create_acct">CREATE ACCOUNT</string>
     <string name="remember">Remember Me</string>
     <string name="Forgot_pass">Forgot Password?</string>
+    <string name="first_amp_last_name"><![CDATA[First & Last Name]]></string>
+    <string name="create_account2">CREATE ACCOUNT</string>
+    <string name="first_amp_last_name2"><![CDATA[First & Last Name]]></string>
+    <string name="create_account3">CREATE ACCOUNT</string>
+    <string name="profile">Profile</string>
+    <string name="menu">Menu</string>
+    <string name="menu_action_1">Menu Action 1</string>
+    <string name="menu_action_2">Menu Action 2</string>
+    <string name="menu_action_3">Menu Action 3</string>
 </resources>
