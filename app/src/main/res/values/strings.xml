@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_Menu">Menu</string>
     <string name="welcome_to_newfront">Welcome to NewFront</string>
     <string name="enter_password">Enter Password</string>
     <string name="forgot_password">Forgot Password?</string>
@@ -12,4 +13,15 @@
     <string name="create_acct">CREATE ACCOUNT</string>
     <string name="remember">Remember Me</string>
     <string name="Forgot_pass">Forgot Password?</string>
+    <string name="first_amp_last_name"><![CDATA[First & Last Name]]></string>
+    <string name="create_account2">CREATE ACCOUNT</string>
+    <string name="first_amp_last_name2"><![CDATA[First & Last Name]]></string>
+    <string name="create_account3">CREATE ACCOUNT</string>
+    <string name="profile">Profile</string>
+    <string name="menu">Menu</string>
+    <string name="menu_action_1">Menu Action 1</string>
+    <string name="menu_action_2">Menu Action 2</string>
+    <string name="menu_action_3">Menu Action 3</string>
+    <string name="ClockNumber">00:00:00</string>
+    <string name="username">Username</string>
 </resources>
