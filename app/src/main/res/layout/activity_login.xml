@@ -47,12 +47,14 @@
                 android:gravity="center"
                 android:text="@string/welcome_to_newfront"
                 android:textAppearance="?textAppearanceBody1"
+                android:textSize="20dp"
                 app:fontFamily="@font/bold" />
 
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints="Email"
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/grey_500"
@@ -60,8 +62,7 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textSize="12sp"
-                android:autofillHints="Email" />
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/password"
@@ -75,7 +76,7 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textSize="12sp" />
+                android:textSize="20dp" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
