@@ -65,13 +65,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.082" />
 
+    <RadioButton
+        android:id="@+id/resetButton"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:text="Reset Time"
+        android:textSize="20dp"
+        app:fontFamily="@font/bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.946"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.719" />
+
     <TextView
         android:id="@+id/username"
         android:layout_width="357dp"
         android:layout_height="44dp"
         android:layout_marginEnd="51dp"
         android:ems="10"
-        android:text="Username"
+        android:text="@string/username"
         app:fontFamily="@font/bold"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
         app:layout_constraintHorizontal_bias="0.0"
@@ -144,10 +158,10 @@
         app:fontFamily="@font/bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.943"
+        app:layout_constraintHorizontal_bias="0.939"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.933" />
+        app:layout_constraintVertical_bias="0.915" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -161,6 +175,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/baseline_menu_24" />
+
+    <TextView
+        android:id="@+id/TimerClock"
+        android:layout_width="95dp"
+        android:layout_height="35dp"
+        android:text="@string/ClockNumber"
+        android:textSize="20sp"
+        app:fontFamily="@font/bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.104" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

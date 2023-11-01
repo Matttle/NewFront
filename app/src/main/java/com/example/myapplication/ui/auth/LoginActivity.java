@@ -2,6 +2,7 @@ package com.example.myapplication.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    public static String displayName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +34,9 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
+            displayName = currentUser.getEmail();
             reload();
         }
 
@@ -48,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
 
         MaterialButton signinbtn = (MaterialButton) findViewById(R.id.sign_in);
         MaterialButton registerbtn = (MaterialButton) findViewById(R.id.to_register);
-
 
 
         signinbtn.setOnClickListener(new View.OnClickListener() {
