@@ -31,18 +31,17 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    public static String displayName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO : check if there is a user signed in (check firebase docs) and if there is then load dashboard instead of sign in page on launch
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
 
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
+      
         if(currentUser != null && currentUser.isEmailVerified()){
             displayName = currentUser.getDisplayName();
             reload();
@@ -73,8 +72,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 final String emailTxt = user.getText().toString();
                 final String passTxt = pass.getText().toString();
-
-                // Add login failed and login successful code - Matt ***
 
                 if (user.getText().toString().isEmpty()|| pass.getText().toString().isEmpty()){
                     Toast.makeText(LoginActivity.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();

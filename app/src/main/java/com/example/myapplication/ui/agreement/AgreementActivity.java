@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.text.Html;
+//import android.text.Html;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
@@ -42,8 +42,9 @@ public class AgreementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agreement);
         TextView textView = findViewById(R.id.txt_agreement);
-        textView.setText(Html.fromHtml(agreement));
-
+        //textView.setText(Html.fromHtml(agreement)); Removed Html functions as it was causing the following to show in the build tab: Note: C:\Users\matth\AndroidStudioProjects\NewFront\app\src\main\java\com\example\myapplication|ui\agreement\AgreementActivity.java uses or overrides a deprecated API.
+        //Note: Recompile with -Xlint:deprecation for details.
+        textView.setText(agreement);
 
     }
 }
