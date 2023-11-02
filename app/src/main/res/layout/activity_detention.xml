@@ -19,6 +19,7 @@
         app:title="UserName" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:theme="@style/Theme.MaterialComponents.DayNight.Bridge"
@@ -259,11 +260,13 @@
                         android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/companyInputBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/companyInput"
                             android:layout_width="115dp"
                             android:layout_height="wrap_content" />
                     </com.google.android.material.textfield.TextInputLayout>
