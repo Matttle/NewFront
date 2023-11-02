@@ -31,6 +31,7 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    public static String displayName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
