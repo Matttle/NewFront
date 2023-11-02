@@ -29,15 +29,17 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO : check if there is a user signed in (check firebase docs) and if there is then load dashboard instead of sign in page on launch
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            displayName = currentUser.getEmail();
+            displayName = currentUser.getEmail(); // TODO: Change getEmail with getDisplayName() to display that instead. (when we have display names)
             reload();
+        }
+        else {
+            displayName = "Guest";
         }
 
 
@@ -57,8 +59,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 final String emailTxt = user.getText().toString();
                 final String passTxt = pass.getText().toString();
-
-                // Add login failed and login successful code - Matt ***
 
                 if (user.getText().toString().isEmpty()|| pass.getText().toString().isEmpty()){
                     Toast.makeText(LoginActivity.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
