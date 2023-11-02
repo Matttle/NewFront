@@ -86,14 +86,14 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <TextView
+                <Button
                     android:id="@+id/to_reset"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="100dp"
                     android:text="@string/Forgot_pass"
                     android:textSize="12sp"
                     android:textStyle="bold"
+                    android:background="@android:color/transparent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -109,6 +109,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

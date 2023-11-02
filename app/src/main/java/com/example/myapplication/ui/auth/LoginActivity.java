@@ -3,8 +3,10 @@ package com.example.myapplication.ui.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,11 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.SignInMethodQueryResult;
+
+import org.w3c.dom.Text;
+
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -33,13 +40,12 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            displayName = currentUser.getEmail(); // TODO: Change getEmail with getDisplayName() to display that instead. (when we have display names)
+      
+        if(currentUser != null && currentUser.isEmailVerified()){
+            displayName = currentUser.getDisplayName();
             reload();
-        }
-        else {
-            displayName = "Guest";
         }
 
 
@@ -53,6 +59,14 @@ public class LoginActivity extends AppCompatActivity {
         MaterialButton signinbtn = (MaterialButton) findViewById(R.id.sign_in);
         MaterialButton registerbtn = (MaterialButton) findViewById(R.id.to_register);
 
+        Button to_reset = (Button) findViewById(R.id.to_reset);
+
+        to_reset.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                resetPassword(email.getText().toString());
+             }
+         }
+        );
 
         signinbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -70,10 +84,6 @@ public class LoginActivity extends AppCompatActivity {
         );
 
 
-
-
-
-
         registerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,50 +94,47 @@ public class LoginActivity extends AppCompatActivity {
 
     private void reload() {
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        LoginActivity.this.finish();
     }
 
     private void signIn(String email, String password) {
-        Log.d("TAG", "signIn:" + email);
-        Log.d("TAG", "password:" + password);
+        //Log.d("TAG", "signIn:" + email);
+        //Log.d("TAG", "password:" + password);
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Log.d("TAG", "signInWithEmail:success");
+                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                            if (!currentUser.isEmailVerified()){
+                                Toast.makeText(LoginActivity.this, "email not verified, sending verification email to " + currentUser.getEmail(), Toast.LENGTH_LONG).show();
+                                currentUser.sendEmailVerification();
+                                return;
+                            }
                             Toast.makeText(LoginActivity.this, "Login success.", Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            // TODO : check "user.isEmailVerified()" to assure the user verified their email and if they haven't send email verification
-                            /*
-                            if (user.isEmailVerified())
-                            {
-                                Toast.makeText(LoginActivity.this, "isEmailVerified.", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
-                                Toast.makeText(LoginActivity.this, "isNotEmailVerified.", Toast.LENGTH_SHORT).show();
-                                // user.sendEmailVerification();
-                            }
+                            LoginActivity.this.finish();
 
-                             */
                         } else {
-                            // If sign in fails, display a message to the user.
                             // TODO : look into why it failed to give the user a better response
                             Log.w("TAG", "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Login failed.", Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(getContext(), "Authentication failed.",
-                            //        Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                            //checkForMultiFactorFailure(task.getException());
                         }
                     }
                 });
     }
 
+    private void resetPassword(String emailAddress){
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        //String emailAddress = "user@example.com";
+        if (emailAddress.isEmpty()){
+            Toast.makeText(LoginActivity.this, "please enter valid email", Toast.LENGTH_LONG).show();
+            return;
+        }
 
-
-
+        Toast.makeText(LoginActivity.this, "password recovory email sent to: " + emailAddress, Toast.LENGTH_SHORT).show();
+        mAuth.sendPasswordResetEmail(emailAddress);
+    }
 }

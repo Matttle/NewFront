@@ -104,7 +104,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1.0" />
 
-                <EditText
+                <Button
                     android:id="@+id/to_reset"
                     android:layout_width="126dp"
                     android:layout_height="48dp"
@@ -116,6 +116,7 @@
                     android:textAlignment="center"
                     android:textSize="12sp"
                     android:textStyle="bold"
+                    android:background="@android:color/transparent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
