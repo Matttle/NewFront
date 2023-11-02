@@ -15,6 +15,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -62,7 +63,7 @@ public class Register extends AppCompatActivity {
                 } else {
                     if (passTxt.equals(conpassTxt))
                     {
-                        signUp(emailTxt, passTxt);
+                        signUp(emailTxt, passTxt, nameTxt);
                     }
                     else
                     {
@@ -75,7 +76,7 @@ public class Register extends AppCompatActivity {
 
 
     }
-    public void signUp(String email, String password)
+    public void signUp(String email, String password, String fullname)
     {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>()
@@ -87,8 +88,16 @@ public class Register extends AppCompatActivity {
                             Log.d("TAG", "createUserWithEmail:success");
                             Toast.makeText(Register.this, "createUserWithEmail:success", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(fullname).build();
+
+                            user.updateProfile(profileUpdates);
+
+
+                            user.getDisplayName();
                             startActivity(new Intent(Register.this, LoginActivity.class));
-                            // user.sendEmailVerification();
+                            user.sendEmailVerification();
                             // updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
