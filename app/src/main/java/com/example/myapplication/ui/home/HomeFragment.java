@@ -1,12 +1,17 @@
 package com.example.myapplication.ui.home;
 
+import static com.example.myapplication.MainActivity.myToolbar;
+import static com.example.myapplication.ui.auth.LoginActivity.displayName;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -24,8 +29,9 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        if (myToolbar != null)
+            myToolbar.setTitle(displayName);
+
         return root;
     }
 

@@ -11,6 +11,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/blue_200"
+        android:backgroundTint="@color/blue_700"
+        android:backgroundTintMode="src_atop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -166,6 +169,7 @@
             <DatePicker
                 android:layout_width="163dp"
                 android:layout_height="282dp"
+                android:id="@+id/datePicker"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -222,6 +226,7 @@
                         android:layout_marginStart="4dp">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/StartTimeEdit"
                             android:layout_width="106dp"
                             android:layout_height="wrap_content" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -243,6 +248,7 @@
                         android:layout_marginStart="4dp">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/EndTimeEdit"
                             android:layout_width="115dp"
                             android:layout_height="wrap_content" />
                     </com.google.android.material.textfield.TextInputLayout>
