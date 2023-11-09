@@ -1,5 +1,8 @@
 package com.example.myapplication.ui.notifications;
 
+import static com.example.myapplication.MainActivity.myToolbar;
+import static com.example.myapplication.ui.auth.LoginActivity.displayName;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +26,10 @@ public class NotificationsFragment extends Fragment {
 
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        if (myToolbar != null)
+            myToolbar.setTitle(displayName);
+
 
         final TextView textView = binding.textNotifications;
         notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);

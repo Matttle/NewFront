@@ -1,12 +1,16 @@
 package com.example.myapplication.ui.dashboard;
 
 import static com.example.myapplication.ui.auth.LoginActivity.displayName;
+import static com.example.myapplication.MainActivity.myToolbar;
 
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -15,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import android.content.DialogInterface;
@@ -22,6 +27,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.myapplication.R;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentDashboardBinding;
 import com.example.myapplication.ui.auth.LoginActivity;
@@ -72,26 +79,19 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        ImageView menubtn = binding.imageView2;
+        if (myToolbar != null)
+            myToolbar.setTitle(displayName);
+
         android.widget.Button lunchBreak = binding.radioButton3;
         android.widget.Button startTimer = binding.radioButton;
         android.widget.Button stopTimer = binding.radioButton2;
         android.widget.Button resetTimer = binding.resetButton;
-        timerTextView = (TextView) binding.TimerClock;
-        username = (TextView) binding.username;
+        timerTextView = binding.TimerClock;
 
-        if (username != null)
-            username.setText(displayName);
         timerTextView.setText(getTimerText());
 
         timer = new Timer();
 
-        menubtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                startActivity(new Intent(requireContext(), DetentionActivity.class));
-            }
-        }
-        );
 
         startTimer.setOnClickListener(new View.OnClickListener() {
             public  void onClick(View view) {

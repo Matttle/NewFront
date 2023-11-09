@@ -2,28 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.detention.DetentionActivity"
+    tools:context=".MainActivity"
     android:id="@+id/menu">
     <item
-        android:id="@+id/Profile"
         android:title="@string/profile"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menuDropdown"
         android:icon="@drawable/ic_menu"
         android:menuCategory="container"
-        android:title="@string/menu"
-        app:showAsAction="ifRoom">
+        android:title=""
+        app:showAsAction="always">
         <menu xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/menuDropdown2">
             <item
                 android:id="@+id/menuAction1"
-                android:title="@string/BackMenuItem"
+                android:title="@string/home_menu_action_1"
                 app:showAsAction="ifRoom" />
-            <item android:title="@string/detention_menu_action_2"
+            <item android:title="@string/home_menu_action_2"
                 android:id="@+id/menuAction2"
                 app:showAsAction="ifRoom" />
-            <item android:title="@string/detention_menu_action_3"
+            <item android:title="@string/home_menu_action_3"
                 android:id="@+id/menuAction3"
                 app:showAsAction="ifRoom" />
         </menu>

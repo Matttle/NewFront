@@ -2,7 +2,7 @@
     <string name="app_name">My Application</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_notifications">Alerts</string>
     <string name="title_Menu">Menu</string>
     <string name="welcome_to_newfront">Welcome to NewFront</string>
     <string name="enter_password">Enter Password</string>
@@ -19,13 +19,19 @@
     <string name="create_account3">CREATE ACCOUNT</string>
     <string name="profile">Profile</string>
     <string name="menu">Menu</string>
-    <string name="menu_action_1">Menu Action 1</string>
-    <string name="menu_action_2">Menu Action 2</string>
-    <string name="menu_action_3">Menu Action 3</string>
+    <string name="BackMenuItem">Back</string>
+    <string name="detention_menu_action_2">Menu Action 2</string>
+    <string name="detention_menu_action_3">Menu Action 3</string>
     <string name="ClockNumber">00:00:00</string>
     <string name="username">Username</string>
-    <string name="trip_information">Trip Information:</string>
-    <string name="start_time">Start Time</string>
-    <string name="pause_time">Pause Time</string>
-    <string name="reset_time">Reset Time</string>
+    <string name="usernameHome">Username</string>
+    <string name="home_menu_action_1">Detention Pay</string>
+    <string name="home_menu_action_2">Menu Action 2</string>
+    <string name="home_menu_action_3">Menu Action 3</string>
+    <string name="profilePicture" />
+    <string name="userEmail">Email: user@example.com</string>
+    <string name="userLocation">Location: City, Country</string>
+    <string name="userAge">Age: 18</string>
+    <string name="userBio">Here is the example bio I came up with for this profile page.</string>
+    <string name="userName">Matt L</string>
 </resources>
