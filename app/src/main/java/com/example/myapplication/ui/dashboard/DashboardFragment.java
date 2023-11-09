@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,9 +18,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import android.content.DialogInterface;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentDashboardBinding;
+import com.example.myapplication.ui.auth.LoginActivity;
 import com.example.myapplication.ui.detention.DetentionActivity;
 
 import java.time.chrono.MinguoChronology;
@@ -27,7 +32,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.*;
 
-public class DashboardFragment extends Fragment {
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
     private FragmentDashboardBinding binding;
     private TextView timerTextView;
@@ -45,6 +58,10 @@ public class DashboardFragment extends Fragment {
                 stopTimer();
         }
     };*/
+
+    GoogleMap gMap;
+    FrameLayout map;
+    boolean mapFailed;
 
     public static double time = 0.0;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -142,7 +159,18 @@ public class DashboardFragment extends Fragment {
         }
         );
 
-        final TextView textView = binding.textDashboard;
+        map = binding.map;
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
+        else {
+            Toast.makeText(getContext(), "Map failed to load.", Toast.LENGTH_SHORT).show();
+            mapFailed = true;
+        }
+
+        final TextView textView = binding.textView2;
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         return root;
@@ -259,6 +287,17 @@ public class DashboardFragment extends Fragment {
     private void startLunch() {
 
     }*/
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        if (!mapFailed) {
+            this.gMap = googleMap;
+
+            com.google.android.gms.maps.model.LatLng mapUnitedStates = new LatLng(37.0902, 95.7129);
+            this.gMap.addMarker(new MarkerOptions().position(mapUnitedStates).title("Marker in US"));
+            this.gMap.moveCamera(CameraUpdateFactory.newLatLng(mapUnitedStates));
+        }
+    }
 
     @Override
     public void onDestroyView() {

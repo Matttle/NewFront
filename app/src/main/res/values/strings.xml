@@ -24,4 +24,8 @@
     <string name="menu_action_3">Menu Action 3</string>
     <string name="ClockNumber">00:00:00</string>
     <string name="username">Username</string>
+    <string name="trip_information">Trip Information:</string>
+    <string name="start_time">Start Time</string>
+    <string name="pause_time">Pause Time</string>
+    <string name="reset_time">Reset Time</string>
 </resources>

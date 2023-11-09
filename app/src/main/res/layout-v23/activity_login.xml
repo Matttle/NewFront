@@ -67,8 +67,8 @@
                 android:hint="@string/fui_email_hint"
                 android:inputType="textWebEmailAddress"
                 android:maxLines="1"
-                android:padding="20dp"
-                android:textSize="12sp" />
+                android:padding="20sp"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/password"
@@ -81,7 +81,8 @@
                 android:hint="@string/enter_password"
                 android:maxLines="1"
                 android:padding="20dp"
-                android:textSize="12sp" />
+                android:textSize="20sp"
+                android:autofillHints="" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -104,7 +105,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1.0" />
 
-                <EditText
+                <CheckBox
                     android:id="@+id/to_reset"
                     android:layout_width="126dp"
                     android:layout_height="48dp"
@@ -157,6 +158,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginCard"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:focusable="true" />
         <!--android:focusable="true"-->
 </androidx.constraintlayout.widget.ConstraintLayout>
