@@ -23,8 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
@@ -60,7 +58,7 @@ public class Register extends AppCompatActivity {
                 String conpassTxt = conpassword.getText().toString();
 
                 if (nameTxt.isEmpty() || emailTxt.isEmpty() || passTxt.isEmpty()) {
-                    Toast.makeText(Register.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
                 } else {
                     if (passTxt.equals(conpassTxt))
                     {
@@ -68,7 +66,7 @@ public class Register extends AppCompatActivity {
                     }
                     else
                     {
-                        Toast.makeText(Register.this, "Passwords dont match", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Passwords don't match", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -79,15 +77,18 @@ public class Register extends AppCompatActivity {
     }
     public void signUp(String email, String password, String fullname)
     {
+        if (!runTextTests(email))
+        {
+            return;
+        }
         mAuth.createUserWithEmailAndPassword(email, password)
+
                 .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>()
                 {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("TAG", "createUserWithEmail:success");
-                            Toast.makeText(Register.this, "createUserWithEmail:success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Account Creation Successful", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
@@ -97,24 +98,34 @@ public class Register extends AppCompatActivity {
 
 
                             user.getDisplayName();
-                            startActivity(new Intent(Register.this, LoginActivity.class));
+                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                             user.sendEmailVerification();
-                            // updateUI(user);
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("TAG", "createUserWithEmail:failure", task.getException());
-                            // TODO : look into why it failed to give the user a better response
-                            Toast.makeText(Register.this, "createUserWithEmail:failure", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Account Creation Failed", Toast.LENGTH_SHORT).show();
 
                         }
                     }
                 });
     }
 
-    public Boolean runTextTests()
+    public Boolean runTextTests(String email)
     {
-        // TODO WIP : this function is to run tests on the text boxes to assure firebase runs smoothly
-       return true;
+        if (email.isEmpty()){
+            Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+
+            return false;
+        }
+
+        if (email.matches(String.valueOf(R.string.emailPattern)))
+        {
+            return true;
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),"Invalid email address", Toast.LENGTH_SHORT).show();
+            return false;
+        }
     }
+
 
 }
