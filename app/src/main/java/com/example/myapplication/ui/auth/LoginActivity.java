@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     public static String displayName;
-
+    public static String mEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
       
         if(currentUser != null && currentUser.isEmailVerified()){
             displayName = currentUser.getDisplayName();
+            mEmail = currentUser.getEmail();
             reload();
         }
 
