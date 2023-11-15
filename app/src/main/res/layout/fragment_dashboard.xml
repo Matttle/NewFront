@@ -94,7 +94,7 @@
     <TextView
         android:id="@+id/TimerClock"
         android:layout_width="95dp"
-        android:layout_height="35dp"
+        android:layout_height="35sp"
         android:text="@string/ClockNumber"
         android:textSize="20sp"
         app:fontFamily="@font/bold"
@@ -109,7 +109,7 @@
         android:id="@+id/radioButton"
         android:layout_width="123dp"
         android:layout_height="59dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="20sp"
         android:text="Start Time"
         android:textSize="20sp"
         app:fontFamily="@font/bold"
