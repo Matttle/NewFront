@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
         mAuth = FirebaseAuth.getInstance();
 
-        final TextView textView = binding.textHome;
+        /*final TextView textView = binding.textHome;
         Button btn = binding.button2;
         FirebaseUser user = mAuth.getCurrentUser();
         btn.setText("Sign Out");
@@ -54,10 +54,8 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 HomeFragment.this.getActivity().finish();
             }
-        });
+        });*/
 
-
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
