@@ -2,6 +2,8 @@ package com.example.myapplication.ui.home;
 
 import static com.example.myapplication.MainActivity.myToolbar;
 import static com.example.myapplication.ui.auth.LoginActivity.displayName;
+import static com.example.myapplication.ui.dashboard.DashboardFragment.mEstimatedPay;
+import static com.example.myapplication.ui.dashboard.DashboardFragment.round;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -55,6 +57,20 @@ public class HomeFragment extends Fragment {
                 HomeFragment.this.getActivity().finish();
             }
         });*/
+
+        if (round(mEstimatedPay) == 0.0)
+            binding.revenue.setText("$" + round(mEstimatedPay) + "0");
+        else
+            binding.revenue.setText("$" + round(mEstimatedPay));
+
+        // profit = revenue - expenses but complicated looking.
+
+        double profit = Double.parseDouble(binding.revenue.getText().toString().replaceAll("[^\\d.]+", "")) - Double.parseDouble(binding.expenses.getText().toString().replaceAll("[^\\d.]+", ""));
+
+        if (profit == 0)
+            binding.profit.setText("$" + profit + "0");
+        else
+            binding.profit.setText("$" + profit);
 
         return root;
     }

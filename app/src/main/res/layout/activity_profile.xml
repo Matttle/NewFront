@@ -105,7 +105,7 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_height="20dp">
+                android:layout_height="21dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -133,7 +133,7 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_height="22dp">
+                android:layout_height="23dp">
 
                 <TextView
                     android:layout_width="match_parent"

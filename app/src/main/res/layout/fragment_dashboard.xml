@@ -25,7 +25,7 @@
         android:id="@+id/textView3"
         android:layout_width="230dp"
         android:layout_height="45dp"
-        android:text="Miles Driven: 0"
+        android:text="@string/milesDriven"
         android:textSize="20sp"
         app:fontFamily="@font/bold"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
