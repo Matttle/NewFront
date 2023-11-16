@@ -1,7 +1,7 @@
 package com.example.myapplication.ui.dashboard;
 
-import static com.example.myapplication.ui.auth.LoginActivity.displayName;
 import static com.example.myapplication.MainActivity.myToolbar;
+import static com.example.myapplication.ui.auth.LoginActivity.displayName;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -38,6 +38,12 @@ import java.time.chrono.MinguoChronology;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.*;
+import com.example.myapplication.ui.detention.DetentionActivity;
+
+import java.time.chrono.MinguoChronology;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.*;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -51,7 +57,6 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
     private FragmentDashboardBinding binding;
     private TextView timerTextView;
-    private TextView username;
     boolean timerOn;
     boolean onLunchBreak;
     Timer timer;
@@ -167,7 +172,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
             mapFailed = true;
         }
 
-        final TextView textView = binding.textView2;
+        final TextView textView = binding.textDashboard;
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         return root;
