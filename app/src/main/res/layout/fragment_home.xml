@@ -231,6 +231,7 @@
                                        android:text="Revenue:"
                                        android:drawablePadding="6dp"/>
                                    <TextView
+                                       android:id="@+id/revenue"
                                        android:layout_width="wrap_content"
                                        android:layout_height="wrap_content"
                                        app:layout_constraintEnd_toEndOf="parent"
@@ -255,6 +256,7 @@
                                        android:text="Expenses:"
                                        android:drawablePadding="6dp"/>
                                    <TextView
+                                       android:id="@+id/expenses"
                                        android:layout_width="wrap_content"
                                        android:layout_height="wrap_content"
                                        app:layout_constraintEnd_toEndOf="parent"
@@ -278,6 +280,7 @@
                                        android:text="Profit:"
                                        android:drawablePadding="6dp"/>
                                    <TextView
+                                       android:id="@+id/profit"
                                        android:layout_width="wrap_content"
                                        android:layout_height="wrap_content"
                                        app:layout_constraintEnd_toEndOf="parent"

@@ -35,4 +35,5 @@
     <string name="userBio">Here is the example bio I came up with for this profile page.</string>
     <string name="userName">Matt L</string>
     <string name="emailPattern">[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+</string>
+    <string name="milesDriven">Miles Driven: 0</string>
 </resources>
