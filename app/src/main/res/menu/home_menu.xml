@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<item
-    android:title="Settings"
-    android:icon="@drawable/ic_setting"
-    app:showAsAction="ifRoom"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    android:id="@+id/menu">
+    <item
+        android:title="@string/profile"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menuDropdown"
+        android:icon="@drawable/ic_menu"
+        android:menuCategory="container"
+        android:title=""
+        app:showAsAction="always">
+        <menu xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/menuDropdown2">
+            <item
+                android:id="@+id/menuAction1"
+                android:title="@string/home_menu_action_1"
+                app:showAsAction="ifRoom" />
+            <item android:title="@string/home_menu_action_2"
+                android:id="@+id/menuAction2"
+                app:showAsAction="ifRoom" />
+            <item android:title="@string/home_menu_action_3"
+                android:id="@+id/menuAction3"
+                app:showAsAction="ifRoom" />
+        </menu>
+    </item>
 </menu>

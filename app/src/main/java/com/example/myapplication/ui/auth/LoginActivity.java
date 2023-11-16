@@ -1,10 +1,13 @@
 package com.example.myapplication.ui.auth;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,23 +23,31 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.SignInMethodQueryResult;
+
+import org.w3c.dom.Text;
+
+import java.util.List;
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     public static String displayName;
-
+    public static String mEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO : check if there is a user signed in (check firebase docs) and if there is then load dashboard instead of sign in page on launch
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
 
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            displayName = currentUser.getEmail();
+      
+        if(currentUser != null && currentUser.isEmailVerified()){
+            displayName = currentUser.getDisplayName();
+            mEmail = currentUser.getEmail();
             reload();
         }
 
@@ -45,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
        EditText password = findViewById(R.id.password);
        MaterialButton register = findViewById(R.id.to_register);
 
+
         TextView user = (TextView) findViewById(R.id.email);
         TextView pass = (TextView) findViewById(R.id.password);
 
@@ -52,26 +64,30 @@ public class LoginActivity extends AppCompatActivity {
         MaterialButton registerbtn = (MaterialButton) findViewById(R.id.to_register);
 
 
+        Button to_reset = (Button) findViewById(R.id.to_reset);
+
+
+        to_reset.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                resetPassword(email.getText().toString());
+             }
+         }
+        );
+
         signinbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
                 final String emailTxt = user.getText().toString();
                 final String passTxt = pass.getText().toString();
 
-                // Add login failed and login successful code - Matt ***
-
                 if (user.getText().toString().isEmpty()|| pass.getText().toString().isEmpty()){
-                    Toast.makeText(LoginActivity.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
                 } else {
                     signIn(emailTxt, passTxt);
                 }
             }
         }
         );
-
-
-
-
 
 
         registerbtn.setOnClickListener(new View.OnClickListener() {
@@ -84,50 +100,59 @@ public class LoginActivity extends AppCompatActivity {
 
     private void reload() {
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        LoginActivity.this.finish();
     }
 
     private void signIn(String email, String password) {
-        Log.d("TAG", "signIn:" + email);
-        Log.d("TAG", "password:" + password);
-
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Log.d("TAG", "signInWithEmail:success");
-                            Toast.makeText(LoginActivity.this, "Login success.", Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                            if (!(currentUser != null && currentUser.isEmailVerified())){
+                                Toast.makeText(getApplicationContext(), "email not verified, sending verification email to " + currentUser.getEmail(), Toast.LENGTH_LONG).show();
+                                currentUser.sendEmailVerification();
+                                return;
+                            }
+                            Toast.makeText(getApplicationContext(), "Login success.", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            // TODO : check "user.isEmailVerified()" to assure the user verified their email and if they haven't send email verification
-                            /*
-                            if (user.isEmailVerified())
-                            {
-                                Toast.makeText(LoginActivity.this, "isEmailVerified.", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
-                                Toast.makeText(LoginActivity.this, "isNotEmailVerified.", Toast.LENGTH_SHORT).show();
-                                // user.sendEmailVerification();
-                            }
-
-                             */
+                            LoginActivity.this.finish();
                         } else {
-                            // If sign in fails, display a message to the user.
-                            // TODO : look into why it failed to give the user a better response
                             Log.w("TAG", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Login failed.", Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(getContext(), "Authentication failed.",
-                            //        Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                            //checkForMultiFactorFailure(task.getException());
+                            Toast.makeText(getApplicationContext(), "Login failed.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
 
+    private void resetPassword(String emailAddress){
+        if (!runTextTests(emailAddress))
+        {
+            return;
+        }
 
+        Toast.makeText(getApplicationContext(), "password recovery email sent to: " + emailAddress, Toast.LENGTH_SHORT).show();
+        mAuth.sendPasswordResetEmail(emailAddress);
 
+    }
 
+    public Boolean runTextTests(String email)
+    {
+        if (email.isEmpty()){
+            Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (email.matches(String.valueOf(R.string.emailPattern)))
+        {
+            return true;
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),"Invalid email address", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
 }
