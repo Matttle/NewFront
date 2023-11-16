@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.auth;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -27,12 +28,13 @@ import com.google.firebase.auth.SignInMethodQueryResult;
 import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     public static String displayName;
-
+    public static String mEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
       
         if(currentUser != null && currentUser.isEmailVerified()){
             displayName = currentUser.getDisplayName();
+            mEmail = currentUser.getEmail();
             reload();
         }
 
@@ -53,13 +56,16 @@ public class LoginActivity extends AppCompatActivity {
        EditText password = findViewById(R.id.password);
        MaterialButton register = findViewById(R.id.to_register);
 
+
         TextView user = (TextView) findViewById(R.id.email);
         TextView pass = (TextView) findViewById(R.id.password);
 
         MaterialButton signinbtn = (MaterialButton) findViewById(R.id.sign_in);
         MaterialButton registerbtn = (MaterialButton) findViewById(R.id.to_register);
 
+
         Button to_reset = (Button) findViewById(R.id.to_reset);
+
 
         to_reset.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -75,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                 final String passTxt = pass.getText().toString();
 
                 if (user.getText().toString().isEmpty()|| pass.getText().toString().isEmpty()){
-                    Toast.makeText(LoginActivity.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
                 } else {
                     signIn(emailTxt, passTxt);
                 }
@@ -98,9 +104,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void signIn(String email, String password) {
-        //Log.d("TAG", "signIn:" + email);
-        //Log.d("TAG", "password:" + password);
-
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -108,33 +111,48 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d("TAG", "signInWithEmail:success");
                             FirebaseUser currentUser = mAuth.getCurrentUser();
-                            if (!currentUser.isEmailVerified()){
-                                Toast.makeText(LoginActivity.this, "email not verified, sending verification email to " + currentUser.getEmail(), Toast.LENGTH_LONG).show();
+                            if (!(currentUser != null && currentUser.isEmailVerified())){
+                                Toast.makeText(getApplicationContext(), "email not verified, sending verification email to " + currentUser.getEmail(), Toast.LENGTH_LONG).show();
                                 currentUser.sendEmailVerification();
                                 return;
                             }
-                            Toast.makeText(LoginActivity.this, "Login success.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Login success.", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             LoginActivity.this.finish();
-
                         } else {
-                            // TODO : look into why it failed to give the user a better response
                             Log.w("TAG", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Login failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Login failed.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
 
     private void resetPassword(String emailAddress){
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        //String emailAddress = "user@example.com";
-        if (emailAddress.isEmpty()){
-            Toast.makeText(LoginActivity.this, "please enter valid email", Toast.LENGTH_LONG).show();
+        if (!runTextTests(emailAddress))
+        {
             return;
         }
 
-        Toast.makeText(LoginActivity.this, "password recovory email sent to: " + emailAddress, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "password recovery email sent to: " + emailAddress, Toast.LENGTH_SHORT).show();
         mAuth.sendPasswordResetEmail(emailAddress);
+
+    }
+
+    public Boolean runTextTests(String email)
+    {
+        if (email.isEmpty()){
+            Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (email.matches(String.valueOf(R.string.emailPattern)))
+        {
+            return true;
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),"Invalid email address", Toast.LENGTH_SHORT).show();
+            return false;
+        }
     }
 }

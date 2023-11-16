@@ -79,9 +79,6 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        if (myToolbar != null)
-            myToolbar.setTitle(displayName);
-
         android.widget.Button lunchBreak = binding.radioButton3;
         android.widget.Button startTimer = binding.radioButton;
         android.widget.Button stopTimer = binding.radioButton2;
