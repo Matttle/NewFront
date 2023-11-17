@@ -88,7 +88,7 @@
         android:text="Lunch Break"
         android:textSize="20sp"
         app:fontFamily="@font/bold"
-        app:layout_constraintBottom_toTopOf="@+id/radioButton4"
+        app:layout_constraintBottom_toTopOf="@+id/logDataBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.96"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,11 +111,11 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <RadioButton
-        android:id="@+id/radioButton4"
+        android:id="@+id/logDataBtn"
         android:layout_width="130dp"
         android:layout_height="60dp"
         android:layout_marginBottom="?actionBarSize"
-        android:text="Sleep"
+        android:text="Log"
         android:textSize="20sp"
         app:fontFamily="@font/bold"
         app:layout_constraintBottom_toBottomOf="parent"

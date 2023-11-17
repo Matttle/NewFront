@@ -81,7 +81,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap mMap;
     private Location mLastKnownLocation;
     private Location mPreviousLocation;
-    public double totalMilesDriven;
+    public static double totalMilesDriven;
     private double milesDriven;
     private static float DEFAULT_ZOOM = 0.15f;
     private static int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1001;
@@ -150,15 +150,32 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                             lunchTask = new TimerTask() {
                                 @Override
                                 public void run() {
-                                    onLunch = !onLunch;
-                                    if (onLunch) {
-                                        startTimer();
-                                    }
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            onLunch = !onLunch;
+                                            if (!onLunch){
+                                                startTimer();
+                                                lunchTask.cancel();
+                                            }
+                                        }
+                                    });
                                 }
                             };
-                            minToMs = Integer.parseInt(inputText.getText().toString());
+                            try {
+                                minToMs = Integer.parseInt(inputText.getText().toString());
+                            }
+                            catch (NumberFormatException nfe) {
+                                Toast.makeText(getContext(), "Invalid", Toast.LENGTH_SHORT).show();
+                                minToMs = 0;
+                            }
                             minToMs *= 6000;
-                            timer.scheduleAtFixedRate(lunchTask, 0, minToMs);
+                            try {
+                                timer.scheduleAtFixedRate(lunchTask, 0, minToMs);
+                            }
+                            catch (IllegalArgumentException illegalArgumentException) {
+                                timer.scheduleAtFixedRate(lunchTask, 0, 1000);
+                            }
                         }
                     }
                     );
@@ -173,8 +190,10 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                     );
                     lunchAlert.show();
                 }
-                else
+                else {
                     binding.radioButton3.setChecked(false);
+                    Toast.makeText(getContext(), "You must be on the clock to take lunch!", Toast.LENGTH_SHORT).show();
+                }
             }
         }
         );
@@ -282,6 +301,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         timerTextView = binding.TimerClock;
         if (!timerOn) {
             timerOn = true;
+            onLunch = false;
             secondsTask = new TimerTask() {
                 @Override
                 public void run() {
