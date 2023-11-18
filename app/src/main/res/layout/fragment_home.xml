@@ -6,300 +6,355 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-   <androidx.constraintlayout.widget.ConstraintLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
-       <androidx.appcompat.widget.Toolbar
-           android:id="@+id/toolbar"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           app:layout_constraintTop_toTopOf="parent"
-           app:menu="@menu/home_fragment_menu"
-           app:title="Home" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-       <ScrollView
-           android:layout_width="match_parent"
-           android:layout_height="0dp"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/toolbar">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/home_fragment_menu"
+            app:title="Home" />
 
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="vertical"
-               android:padding="12dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-               <androidx.constraintlayout.widget.ConstraintLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
 
-                   <com.google.android.material.card.MaterialCardView
-                       android:id="@+id/card.transactions"
-                       android:layout_width="0dp"
-                       android:layout_height="wrap_content"
-                       android:layout_margin="4dp"
-                       app:cardElevation="3dp"
-                       app:layout_constraintBottom_toBottomOf="parent"
-                       app:layout_constraintEnd_toStartOf="@id/card.rate"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/welcomeUser"
+                    android:layout_width="383dp"
+                    android:layout_height="wrap_content"
+                    android:text="Welcome!"
+                    android:layout_marginLeft="4dp"/>
 
-                       <LinearLayout
-                           android:layout_width="match_parent"
-                           android:layout_height="match_parent"
-                           android:gravity="center"
-                           android:orientation="vertical"
-                           android:padding="12dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                           <ImageView
-                               android:layout_width="60dp"
-                               android:layout_height="60dp"
-                               android:src="@drawable/ic_pdf" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card.transactions"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/card.rate"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                           <TextView
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:layout_marginTop="8dp"
-                               android:text="Trips &amp; transactions"
-                               android:textAppearance="?textAppearanceBody1" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
 
-                       </LinearLayout>
-                   </com.google.android.material.card.MaterialCardView>
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:src="@drawable/ic_pdf" />
 
-                   <com.google.android.material.card.MaterialCardView
-                       android:id="@+id/card.rate"
-                       android:layout_width="0dp"
-                       android:layout_height="wrap_content"
-                       android:layout_margin="4dp"
-                       app:cardElevation="3dp"
-                       app:layout_constraintBottom_toBottomOf="parent"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintStart_toEndOf="@id/card.transactions"
-                       app:layout_constraintTop_toTopOf="parent">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Trips &amp; transactions"
+                                android:textAppearance="?textAppearanceBody1" />
 
-                       <LinearLayout
-                           android:layout_width="match_parent"
-                           android:layout_height="match_parent"
-                           android:gravity="center"
-                           android:orientation="vertical"
-                           android:padding="12dp">
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                           <ImageView
-                               android:layout_width="60dp"
-                               android:layout_height="60dp"
-                               android:src="@drawable/ic_star" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card.rate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/card.transactions"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                           <TextView
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:layout_marginTop="8dp"
-                               android:text="Rate Us!"
-                               android:textAppearance="?textAppearanceBody1" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
 
-                       </LinearLayout>
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:src="@drawable/ic_star" />
 
-                   </com.google.android.material.card.MaterialCardView>
-               </androidx.constraintlayout.widget.ConstraintLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Rate Us!"
+                                android:textAppearance="?textAppearanceBody1" />
 
-               <androidx.constraintlayout.widget.ConstraintLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginVertical="12dp">
+                        </LinearLayout>
 
-                   <com.google.android.material.card.MaterialCardView
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:layout_margin="4dp"
-                       app:cardElevation="3dp"
-                       app:layout_constraintBottom_toBottomOf="parent"
-                       app:layout_constraintTop_toTopOf="parent">
+                    </com.google.android.material.card.MaterialCardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                       <androidx.constraintlayout.widget.ConstraintLayout
-                           android:layout_width="match_parent"
-                           android:layout_height="wrap_content"
-                           android:padding="12dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="12dp">
 
-                           <TextView
-                               android:id="@+id/txt.title"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:text="MILEAGE"
-                               android:textAppearance="?textAppearanceBody1"
-                               android:textStyle="bold"
-                               app:layout_constraintStart_toStartOf="parent"
-                               app:layout_constraintTop_toTopOf="parent" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                           <TextView
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:drawableStart="@drawable/ic_calendar"
-                               android:drawablePadding="8dp"
-                               android:text="This Year"
-                               android:textAppearance="?textAppearanceBody2"
-                               android:textStyle="bold"
-                               app:layout_constraintEnd_toEndOf="parent"
-                               app:layout_constraintTop_toTopOf="parent" />
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="114dp"
+                            android:padding="12dp">
 
-                           <ImageView
-                               android:id="@+id/img.chart"
-                               android:layout_width="100dp"
-                               android:layout_height="100dp"
-                               android:layout_marginTop="12dp"
-                               android:src="@drawable/ic_chart"
-                               app:layout_constraintEnd_toEndOf="parent"
-                               app:layout_constraintStart_toStartOf="parent"
-                               app:layout_constraintTop_toBottomOf="@id/txt.title" />
+                            <!--android:drawableStart="@drawable/ic_calendar" TODO: add calendar functionality for mileage over different time periods-->
 
-                           <TextView
-                               android:layout_width="220dp"
-                               android:layout_height="wrap_content"
-                               android:layout_marginTop="8dp"
-                               android:gravity="center"
-                               android:text="Soon this chart will be full of miles! Come back after a drive or add a trip with the + button"
-                               app:layout_constraintEnd_toEndOf="parent"
-                               app:layout_constraintStart_toStartOf="parent"
-                               app:layout_constraintTop_toBottomOf="@id/img.chart" />
-                       </androidx.constraintlayout.widget.ConstraintLayout>
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/mileageBlock"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginTop="36dp"
+                                android:visibility="invisible"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
 
-                   </com.google.android.material.card.MaterialCardView>
 
-               </androidx.constraintlayout.widget.ConstraintLayout>
+                                <TextView
+                                    android:id="@+id/miles"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0.00"
+                                    android:textAppearance="?textAppearanceBody2"
+                                    android:textStyle="bold"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
-               <androidx.constraintlayout.widget.ConstraintLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
+                                <ImageView
+                                    android:id="@+id/imageView2"
+                                    android:layout_width="26dp"
+                                    android:layout_height="26dp"
+                                    android:src="@drawable/ic_mileage_f"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
-                   <com.google.android.material.card.MaterialCardView
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:layout_margin="4dp"
-                       app:cardElevation="3dp"
-                       app:layout_constraintBottom_toBottomOf="parent"
-                       app:layout_constraintTop_toTopOf="parent">
+                                <TextView
+                                    android:layout_width="64dp"
+                                    android:layout_height="26dp"
+                                    android:layout_marginLeft="2dp"
+                                    android:text="Miles:"
+                                    android:textAppearance="?textAppearanceBody2"
+                                    app:layout_constraintStart_toEndOf="@+id/imageView2"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
-                       <androidx.constraintlayout.widget.ConstraintLayout
-                           android:layout_width="match_parent"
-                           android:layout_height="wrap_content"
-                           android:padding="12dp">
 
-                           <Spinner
-                               android:id="@+id/type.spinner"
-                               android:layout_width="0dp"
-                               android:layout_height="wrap_content"
-                               android:entries="@array/transaction_type"
-                               app:layout_constraintEnd_toStartOf="@id/txt.transaction.title"
-                               app:layout_constraintStart_toStartOf="parent"
-                               app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                           <TextView
-                               android:id="@+id/txt.transaction.title"
-                               android:layout_width="0dp"
-                               android:layout_height="wrap_content"
-                               android:layout_marginHorizontal="8dp"
-                               android:text="Work"
-                               app:layout_constraintEnd_toStartOf="@id/txt.calendar"
-                               app:layout_constraintStart_toEndOf="@id/type.spinner"
-                               app:layout_constraintTop_toTopOf="parent" />
+                            <TextView
+                                android:id="@+id/txt.title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="MILEAGE"
+                                android:textAppearance="?textAppearanceBody1"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                           <TextView
-                               android:id="@+id/txt.calendar"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:drawableStart="@drawable/ic_calendar"
-                               android:drawablePadding="8dp"
-                               android:text="This Year"
-                               android:textAppearance="?textAppearanceBody2"
-                               android:textStyle="bold"
-                               app:layout_constraintEnd_toEndOf="parent"
-                               app:layout_constraintTop_toTopOf="parent" />
-                           <LinearLayout
-                               android:layout_width="match_parent"
-                               android:layout_height="wrap_content"
-                               app:layout_constraintTop_toBottomOf="@id/txt.transaction.title"
-                               android:layout_marginTop="12dp"
-                               android:orientation="vertical">
-                               <androidx.constraintlayout.widget.ConstraintLayout
-                                   android:layout_width="match_parent"
-                                   android:layout_height="wrap_content">
-                                   <TextView
-                                       android:layout_width="wrap_content"
-                                       android:layout_height="wrap_content"
-                                       app:layout_constraintTop_toTopOf="parent"
-                                       app:layout_constraintStart_toStartOf="parent"
-                                       android:textAppearance="?textAppearanceBody2"
-                                       android:drawableStart="@drawable/ic_revenue"
-                                       android:text="Revenue:"
-                                       android:drawablePadding="6dp"/>
-                                   <TextView
-                                       android:id="@+id/revenue"
-                                       android:layout_width="wrap_content"
-                                       android:layout_height="wrap_content"
-                                       app:layout_constraintEnd_toEndOf="parent"
-                                       app:layout_constraintTop_toTopOf="parent"
-                                       android:textStyle="bold"
-                                       android:textAppearance="?textAppearanceBody2"
-                                       android:textColor="@color/green_700"
-                                       android:text="$0.00"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="8dp"
+                                android:text="All Time"
+                                android:textAppearance="?textAppearanceBody2"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                               </androidx.constraintlayout.widget.ConstraintLayout>
-                               <androidx.constraintlayout.widget.ConstraintLayout
-                                   android:layout_width="match_parent"
-                                   android:layout_marginVertical="6dp"
-                                   android:layout_height="wrap_content">
-                                   <TextView
-                                       android:layout_width="wrap_content"
-                                       android:layout_height="wrap_content"
-                                       app:layout_constraintTop_toTopOf="parent"
-                                       app:layout_constraintStart_toStartOf="parent"
-                                       android:textAppearance="?textAppearanceBody2"
-                                       android:drawableStart="@drawable/ic_expenses"
-                                       android:text="Expenses:"
-                                       android:drawablePadding="6dp"/>
-                                   <TextView
-                                       android:id="@+id/expenses"
-                                       android:layout_width="wrap_content"
-                                       android:layout_height="wrap_content"
-                                       app:layout_constraintEnd_toEndOf="parent"
-                                       app:layout_constraintTop_toTopOf="parent"
-                                       android:textStyle="bold"
-                                       android:textAppearance="?textAppearanceBody2"
-                                       android:textColor="@color/red_700"
-                                       android:text="$0.00"/>
+                            <TextView
+                                android:id="@+id/mileageTxt"
+                                android:layout_width="220dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:visibility="visible"
+                                android:text="No miles tracked yet. Head to the dashboard to track a drive."
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.503"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="1.0" />
 
-                               </androidx.constraintlayout.widget.ConstraintLayout>
-                               <androidx.constraintlayout.widget.ConstraintLayout
-                                   android:layout_width="match_parent"
-                                   android:layout_height="wrap_content">
-                                   <TextView
-                                       android:layout_width="wrap_content"
-                                       android:layout_height="wrap_content"
-                                       app:layout_constraintTop_toTopOf="parent"
-                                       app:layout_constraintStart_toStartOf="parent"
-                                       android:textAppearance="?textAppearanceBody2"
-                                       android:drawableStart="@drawable/ic_dollar"
-                                       android:text="Profit:"
-                                       android:drawablePadding="6dp"/>
-                                   <TextView
-                                       android:id="@+id/profit"
-                                       android:layout_width="wrap_content"
-                                       android:layout_height="wrap_content"
-                                       app:layout_constraintEnd_toEndOf="parent"
-                                       app:layout_constraintTop_toTopOf="parent"
-                                       android:textStyle="bold"
-                                       android:textAppearance="?textAppearanceBody2"
-                                       android:text="$0.00"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                               </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                           </LinearLayout>
-                       </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                   </com.google.android.material.card.MaterialCardView>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-               </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-           </LinearLayout>
-       </ScrollView>
-   </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp">
+
+                            <Spinner
+                                android:id="@+id/type.spinner"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:entries="@array/transaction_type"
+                                app:layout_constraintEnd_toStartOf="@id/txt.transaction.title"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/txt.transaction.title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="8dp"
+                                android:text="Work"
+                                app:layout_constraintEnd_toStartOf="@id/txt.calendar"
+                                app:layout_constraintStart_toEndOf="@id/type.spinner"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <!--android:drawableStart="@drawable/ic_calendar" TODO: add calendar functionality for profit over different time periods-->
+                            <TextView
+                                android:id="@+id/txt.calendar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="8dp"
+                                android:text="All Time"
+                                android:textAppearance="?textAppearanceBody2"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:orientation="vertical"
+                                app:layout_constraintTop_toBottomOf="@id/txt.transaction.title">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:drawableStart="@drawable/ic_revenue"
+                                        android:drawablePadding="6dp"
+                                        android:text="Revenue:"
+                                        android:textAppearance="?textAppearanceBody2"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/revenue"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="$0.00"
+                                        android:textAppearance="?textAppearanceBody2"
+                                        android:textColor="@color/green_700"
+                                        android:textStyle="bold"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="6dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:drawableStart="@drawable/ic_expenses"
+                                        android:drawablePadding="6dp"
+                                        android:text="Expenses:"
+                                        android:textAppearance="?textAppearanceBody2"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/expenses"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="$0.00"
+                                        android:textAppearance="?textAppearanceBody2"
+                                        android:textColor="@color/red_700"
+                                        android:textStyle="bold"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:drawableStart="@drawable/ic_dollar"
+                                        android:drawablePadding="6dp"
+                                        android:text="Profit:"
+                                        android:textAppearance="?textAppearanceBody2"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/profit"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="$0.00"
+                                        android:textAppearance="?textAppearanceBody2"
+                                        android:textStyle="bold"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
