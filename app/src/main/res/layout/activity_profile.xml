@@ -10,7 +10,7 @@
         android:background="?attr/colorPrimary">
 
         <Button
-            android:id="@+id/btnBack"
+            android:id="@+id/btnBackProfile"
             android:layout_width="33dp"
             android:layout_height="35dp"
             android:layout_marginTop="10dp"
@@ -81,6 +81,7 @@
                 android:layout_marginTop="17dp">
 
                 <TextView
+                    android:id="@+id/themeBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Theme/Color Preferences"
@@ -88,6 +89,7 @@
                     android:textSize="16sp" />
 
                 <ImageView
+                    android:id="@+id/themeArrow"
                     android:layout_width="40dp"
                     android:layout_height="19dp"
                     android:layout_alignParentEnd="true"
@@ -136,6 +138,7 @@
                 android:layout_height="23dp">
 
                 <TextView
+                    android:id="@+id/paymentHistory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Payment History"
@@ -143,6 +146,7 @@
                     android:textSize="16sp" />
 
                 <ImageView
+                    android:id="@+id/paymentArrow"
                     android:layout_width="40dp"
                     android:layout_height="19dp"
                     android:layout_alignParentEnd="true"

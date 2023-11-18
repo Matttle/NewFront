@@ -47,6 +47,13 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.payment.PaymentActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ui.home.HomeFragment" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

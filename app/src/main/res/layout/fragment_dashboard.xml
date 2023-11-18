@@ -100,7 +100,7 @@
         android:layout_width="130dp"
         android:layout_height="60dp"
         android:layout_marginBottom="1dp"
-        android:text="Reset Time"
+        android:text="Reset  Trip"
         android:textSize="20sp"
         app:fontFamily="@font/bold"
         app:layout_constraintBottom_toTopOf="@+id/radioButton3"

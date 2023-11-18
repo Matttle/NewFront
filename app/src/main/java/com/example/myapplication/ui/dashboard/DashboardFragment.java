@@ -1,27 +1,19 @@
 package com.example.myapplication.ui.dashboard;
 
-import static com.example.myapplication.MainActivity.myToolbar;
-import static com.example.myapplication.ui.auth.LoginActivity.displayName;
-
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -33,33 +25,19 @@ import androidx.appcompat.app.AlertDialog;
 
 import android.Manifest;
 import com.example.myapplication.R;
-import com.example.myapplication.MainActivity;
-import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentDashboardBinding;
-import com.example.myapplication.ui.auth.LoginActivity;
-import com.example.myapplication.ui.detention.DetentionActivity;
 
 import java.text.DecimalFormat;
-import java.time.chrono.MinguoChronology;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.*;
-import com.example.myapplication.ui.detention.DetentionActivity;
-
-import java.time.chrono.MinguoChronology;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.*;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 public class DashboardFragment extends Fragment implements OnMapReadyCallback {
@@ -74,19 +52,23 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     boolean onLunch;
     private int minToMs;
     TimerTask locationTask;
-    TimerTask prevLocationTask;
     GoogleMap gMap;
     FrameLayout map;
     boolean mapFailed;
     private GoogleMap mMap;
     private Location mLastKnownLocation;
-    private Location mPreviousLocation;
+    private Location mPreviousLocation = new Location("initial");
     public static double totalMilesDriven;
+    public static double allTimeMiles;
+    public static String milesDrivenText;
+    public static String estimatedPayText;
     private double milesDriven;
-    private static float DEFAULT_ZOOM = 0.15f;
-    private static int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1001;
+    private static final float DEFAULT_ZOOM = 0.15f;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1001;
     private static final double EARTH_RADIUS_MILES = 3958.8;
     public static double mEstimatedPay;
+    public static double totalEstimatedPay;
+    public static boolean milesVisible = false;
 
     public static double time = 0.0;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -97,16 +79,19 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        android.widget.Button lunchBreak = binding.radioButton3;
-        android.widget.Button startTimer = binding.radioButton;
-        android.widget.Button stopTimer = binding.radioButton2;
-        android.widget.Button resetTimer = binding.resetButton;
+        Button lunchBreak = binding.radioButton3;
+        Button startTimer = binding.radioButton;
+        Button stopTimer = binding.radioButton2;
+        Button resetTimer = binding.resetButton;
+        Button logBtn = binding.logDataBtn;
         timerTextView = binding.TimerClock;
 
         timerTextView.setText(getTimerText());
 
         timer = new Timer();
 
+        milesDrivenText = "Miles Driven: " + round(totalMilesDriven);
+        estimatedPayText = "Estimated Pay: $" + round(totalMilesDriven * 0.3);
 
         startTimer.setOnClickListener(new View.OnClickListener() {
             public  void onClick(View view) {
@@ -127,7 +112,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         resetTimer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 binding.resetButton.setChecked(false);
-                resetTimer();
+                resetTrip();
             }
         }
         );
@@ -137,7 +122,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 if (timerOn) {
                     binding.radioButton3.setChecked(true);
                     stopTimer();
-                    AlertDialog.Builder lunchAlert = new AlertDialog.Builder(requireContext()); // Code for lunch timer functionality - Matt
+                    AlertDialog.Builder lunchAlert = new AlertDialog.Builder(requireContext());
                     lunchAlert.setTitle("Lunch Break");
                     lunchAlert.setMessage("Enter the time you'll be on lunch. (Minutes)");
                     final EditText inputText = new EditText(getActivity());
@@ -169,7 +154,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                                 Toast.makeText(getContext(), "Invalid", Toast.LENGTH_SHORT).show();
                                 minToMs = 0;
                             }
-                            minToMs *= 6000;
+                            minToMs *= 60000;
                             try {
                                 timer.scheduleAtFixedRate(lunchTask, 0, minToMs);
                             }
@@ -198,6 +183,41 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         }
         );
 
+        logBtn.setOnClickListener(v -> {
+            binding.logDataBtn.setChecked(false);
+            AlertDialog.Builder logAlert = new AlertDialog.Builder(requireActivity());
+            logAlert.setTitle("Log Trip");
+            logAlert.setMessage("Are you sure you want to log your trip data?");
+            logAlert.setPositiveButton("Yes", (dialogInterface, i) -> {
+                totalEstimatedPay += mEstimatedPay;
+                allTimeMiles += totalMilesDriven;
+
+                milesVisible = true;
+
+                if (secondsTask != null) {
+                    secondsTask.cancel();
+                    time = 0.0;
+                    stopTimer();
+                    timerTextView.setText(formatTime(0, 0, 0));
+                }
+                if (hoursTask != null)
+                    hoursTask.cancel();
+                binding.textView2.setText("Hours Worked: 00");
+                binding.textView3.setText("Miles Driven: 0");
+                binding.textView4.setText("Estimated Pay: $0.00");
+                mEstimatedPay = 0;
+                totalMilesDriven = 0;
+            }
+            );
+
+            logAlert.setNeutralButton("No", (dialogInterface, i) -> {
+
+            }
+            );
+
+            logAlert.show();
+        });
+
         map = binding.map;
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
@@ -206,55 +226,51 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
             locationTask = new TimerTask() {
                 @Override
                 public void run() {
-                    getActivity().runOnUiThread(new Runnable() {
+                    requireActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                                    == PackageManager.PERMISSION_GRANTED) {
-                                FusedLocationProviderClient fusedLocationClient =
-                                        LocationServices.getFusedLocationProviderClient(getActivity());
-                                fusedLocationClient.getLastLocation()
-                                        .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
-                                            @Override
-                                            public void onSuccess(Location location) {
-                                                if (location != null) {
-                                                    mLastKnownLocation = location;
-                                                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                                            new LatLng(mLastKnownLocation.getLatitude(),
-                                                                    mLastKnownLocation.getLongitude()), 15f));
+                            try {
+                                if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                                        == PackageManager.PERMISSION_GRANTED) {
+                                    FusedLocationProviderClient fusedLocationClient =
+                                            LocationServices.getFusedLocationProviderClient(getActivity());
+                                    fusedLocationClient.getLastLocation()
+                                            .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                                                @Override
+                                                public void onSuccess(Location location) {
+                                                    if (location != null) {
+                                                        if (UserMoved(location)) {
+                                                            mLastKnownLocation = location;
+                                                            try {
+                                                                milesDriven = getMilesDriven(mPreviousLocation.getLongitude(), mPreviousLocation.getLatitude(), mLastKnownLocation.getLongitude(), mLastKnownLocation.getLatitude());
+                                                            } catch (NullPointerException npe) {
+                                                                Toast.makeText(getContext(), "noo", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                            mPreviousLocation = location;
+                                                        }
+
+                                                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                                                new LatLng(mLastKnownLocation.getLatitude(),
+                                                                        mLastKnownLocation.getLongitude()), 15f));
+                                                    }
                                                 }
-                                            }
-                                        });
-                            }
-                            if (mPreviousLocation != null)
-                                milesDriven = getMilesDriven(mPreviousLocation.getLongitude(), mPreviousLocation.getLatitude(), mLastKnownLocation.getLongitude(), mLastKnownLocation.getLatitude());
-                            else
+                                            });
+                                }
+                                totalMilesDriven += milesDriven;
                                 milesDriven = 0;
-                            totalMilesDriven += milesDriven;
-                            String milesDrivenText = "Miles Driven: " + round(totalMilesDriven);
-                            binding.textView3.setText(milesDrivenText);
-                            mEstimatedPay = totalMilesDriven * 0.3;
-                            String estimatedPay = "Estimated Pay: $" + round(totalMilesDriven * 0.3);
-                            binding.textView4.setText(estimatedPay);
-                            mPreviousLocation = null;
+                                milesDrivenText = "Miles Driven: " + round(totalMilesDriven);
+                                binding.textView3.setText(milesDrivenText);
+                                mEstimatedPay = totalMilesDriven * 0.3;
+                                estimatedPayText = "Estimated Pay: $" + round(totalMilesDriven * 0.3);
+                                binding.textView4.setText(estimatedPayText);
+                            } catch (IllegalStateException ise) {
+
+                            }
                         }
                     });
                 }
             };
-            timer.scheduleAtFixedRate(locationTask, 5000, 1000);
-            prevLocationTask = new TimerTask() {
-                @Override
-                public void run() {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (mLastKnownLocation != null)
-                                mPreviousLocation = mLastKnownLocation;
-                        }
-                    });
-                }
-            };
-            timer.scheduleAtFixedRate(prevLocationTask, 5000, 5000);
+            timer.scheduleAtFixedRate(locationTask, 1000, 100);
         }
         else {
             Toast.makeText(getContext(), "Map failed to load.", Toast.LENGTH_SHORT).show();
@@ -264,7 +280,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         return root;
     }
 
-    public void resetTimer() {
+    public void resetTrip() {
         timerTextView = (TextView) binding.TimerClock;
         AlertDialog.Builder resetAlert = new AlertDialog.Builder(requireActivity());
         resetAlert.setTitle("Reset Time");
@@ -281,6 +297,11 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 }
                 if (hoursTask != null)
                     hoursTask.cancel();
+                binding.textView2.setText("Hours Worked: 00");
+                binding.textView3.setText("Miles Driven: 0");
+                binding.textView4.setText("Estimated Pay: $0.00");
+                mEstimatedPay = 0;
+                totalMilesDriven = 0;
             }
         }
         );
@@ -360,18 +381,6 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         return String.format("%02d",hours) + ":" + String.format("%02d", minutes) + ":" + String.format("%02d", seconds);
     }
 
-    private int getMinutesForLunch(String string) { // Code for lunch timer functionality - Matt
-        int minToMs = 0;
-        try {
-            minToMs = Integer.parseInt(string);
-        } catch(NumberFormatException nfe) {
-            System.out.println("Could not parse " + nfe);
-        }
-        minToMs *= 6000;
-
-        return minToMs;
-    }
-
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
@@ -403,6 +412,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                             public void onSuccess(Location location) {
                                 if (location != null) {
                                     mLastKnownLocation = location;
+                                    mPreviousLocation = location;
                                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                             new LatLng(mLastKnownLocation.getLatitude(),
                                                     mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
@@ -438,6 +448,14 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         return distance;
     }
 
+    public boolean UserMoved(Location currentLocation) {
+        if (mLastKnownLocation != null && currentLocation != null) {
+            return !(currentLocation.getLongitude() == mLastKnownLocation.getLongitude() &&
+                    currentLocation.getLatitude() == mLastKnownLocation.getLatitude());
+        }
+        return false;
+    }
+
     public static double round(double num) {
         DecimalFormat df = new DecimalFormat("#.##");
         return Double.parseDouble(df.format(num));
@@ -449,7 +467,6 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         if (timerOn)
             secondsTask.cancel();
         locationTask.cancel();
-        prevLocationTask.cancel();
         binding = null;
     }
 }
