@@ -1,6 +1,8 @@
 package com.example.myapplication.ui.auth;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,7 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
+
 import com.google.android.material.button.MaterialButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -58,29 +64,54 @@ public class Register extends AppCompatActivity {
                 String conpassTxt = conpassword.getText().toString();
 
                 if (nameTxt.isEmpty() || emailTxt.isEmpty() || passTxt.isEmpty()) {
+                    if (nameTxt.isEmpty()) {
+                        fullname.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    } else {
+                        fullname.getBackground().clearColorFilter();
+                    }
+
+
+                    if (emailTxt.isEmpty()) {
+                        email.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    }else {
+                        email.getBackground().clearColorFilter();
+                    }
+
+                    if (passTxt.isEmpty()) {
+                        password.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    }else {
+                        password.getBackground().clearColorFilter();
+                    }
+
+                    if (passTxt.isEmpty()) {
+                        conpassword.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    } else {
+                        conpassword.getBackground().clearColorFilter();
+                    }
+
                     Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
                 } else {
+                    email.getBackground().clearColorFilter();
                     if (passTxt.equals(conpassTxt))
                     {
+                        password.getBackground().clearColorFilter();
+                        conpassword.getBackground().clearColorFilter();
+
                         signUp(emailTxt, passTxt, nameTxt);
                     }
                     else
                     {
+                        password.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                        conpassword.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+
                         Toast.makeText(getApplicationContext(), "Passwords don't match", Toast.LENGTH_SHORT).show();
                     }
                 }
-
             }
         });
-
-
     }
     public void signUp(String email, String password, String fullname)
     {
-        if (!runTextTests(email))
-        {
-            return;
-        }
         mAuth.createUserWithEmailAndPassword(email, password)
 
                 .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>()
@@ -88,44 +119,23 @@ public class Register extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Account Creation Successful", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(fullname).build();
 
+                            assert user != null;
                             user.updateProfile(profileUpdates);
-
-
                             user.getDisplayName();
+
                             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                             user.sendEmailVerification();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Account Creation Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Account Creation Successful", Toast.LENGTH_SHORT).show();
 
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Account Creation Failed, email already has an account", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
     }
-
-    public Boolean runTextTests(String email)
-    {
-        if (email.isEmpty()){
-            Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
-
-            return false;
-        }
-
-        if (email.matches(String.valueOf(R.string.emailPattern)))
-        {
-            return true;
-        }
-        else
-        {
-            Toast.makeText(getApplicationContext(),"Invalid email address", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }
-
-
 }
