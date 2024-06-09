@@ -28,6 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public static String mName = "Enter your name";
     public static boolean fromProfile;
+    public static double mPay = 0.00000001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         EditText email = findViewById(R.id.editTextEmail);
         EditText name = findViewById(R.id.editTextName);
+        EditText pay = findViewById(R.id.editTextPay);
 
         email.setHint(mEmail);
         name.setHint(mName);
@@ -80,6 +82,15 @@ public class ProfileActivity extends AppCompatActivity {
 
         apply.setOnClickListener(v -> {
             mName = name.getText().toString();
+            if (pay.getText().toString() == "")
+                mPay = 0;
+            else {
+                try {
+                    mPay = Double.parseDouble(pay.getText().toString());
+                } catch (NumberFormatException nfe) {
+                    Toast.makeText(getApplicationContext(), "Invalid.", Toast.LENGTH_SHORT).show();
+                }
+            }
             Toast.makeText(getApplicationContext(), "Settings applied.", Toast.LENGTH_SHORT).show();
         });
 

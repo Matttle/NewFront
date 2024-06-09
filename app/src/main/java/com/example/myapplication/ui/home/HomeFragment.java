@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
         });
 
         if (!Objects.equals(mName, "Enter your name"))
-            binding.welcomeUser.setText(mName);
+            binding.welcomeUser.setText("Welcome " + mName + "!");
 
         if (round(mEstimatedPay) == 0.0)
             binding.revenue.setText("$" + round(totalEstimatedPay) + "0");
@@ -73,15 +73,15 @@ public class HomeFragment extends Fragment {
         }
 
         revenue += Double.parseDouble(binding.revenue.getText().toString().replaceAll("[^\\d.]+", ""));
-        binding.revenue.setText("$" + revenue);
+        binding.revenue.setText("$" + round(revenue));
         revenue = 0;
 
         expenses += Double.parseDouble(binding.expenses.getText().toString().replaceAll("[^\\d.]+", ""));
-        binding.expenses.setText("$" + expenses);
+        binding.expenses.setText("$" + round(expenses));
         expenses = 0;
 
         // profit = revenue - expenses but complicated looking.
-        double profit = Double.parseDouble(binding.revenue.getText().toString().replaceAll("[^\\d.]+", "")) - Double.parseDouble(binding.expenses.getText().toString().replaceAll("[^\\d.]+", ""));
+        double profit = round(Double.parseDouble(binding.revenue.getText().toString().replaceAll("[^\\d.]+", "")) - Double.parseDouble(binding.expenses.getText().toString().replaceAll("[^\\d.]+", "")));
 
         if (profit == 0)
             binding.profit.setText("$" + profit + "0");

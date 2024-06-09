@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-        myToolbar.setTitle(displayName);
+        myToolbar.setTitle(displayName + "");
         findViewById(R.id.Profile).setOnClickListener(v -> {
             fromMain = true;
             startActivity(new Intent(MainActivity.this, ProfileActivity.class));
