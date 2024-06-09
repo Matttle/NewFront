@@ -23,14 +23,20 @@ import com.example.myapplication.ui.payment.PaymentActivity;
 
 import com.example.myapplication.ui.auth.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class ProfileActivity extends AppCompatActivity {
 
     public static String mName = "Enter your name";
+    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+
     public static boolean fromProfile;
     public static double mPay = 0.00000001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mName = currentUser.getDisplayName();
+        mEmail = currentUser.getEmail();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
