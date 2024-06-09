@@ -1,5 +1,7 @@
 package com.example.myapplication.ui.dashboard;
 
+import static com.example.myapplication.ui.profile.ProfileActivity.mPay;
+
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.location.Location;
@@ -91,7 +93,10 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         timer = new Timer();
 
         milesDrivenText = "Miles Driven: " + round(totalMilesDriven);
-        estimatedPayText = "Estimated Pay: $" + round(totalMilesDriven * 0.3);
+        if (mPay == 0.00000001)
+            estimatedPayText = "Estimated Pay: $" + round(totalMilesDriven * 0.3);
+        else
+            estimatedPayText = "Estimated Pay: $" + round(totalMilesDriven * mPay);
 
         startTimer.setOnClickListener(new View.OnClickListener() {
             public  void onClick(View view) {
@@ -249,9 +254,9 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                                                             mPreviousLocation = location;
                                                         }
 
-                                                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                                        /*mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                                                 new LatLng(mLastKnownLocation.getLatitude(),
-                                                                        mLastKnownLocation.getLongitude()), 15f));
+                                                                        mLastKnownLocation.getLongitude()), 10f));*/
                                                     }
                                                 }
                                             });
@@ -261,7 +266,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                                 milesDrivenText = "Miles Driven: " + round(totalMilesDriven);
                                 binding.textView3.setText(milesDrivenText);
                                 mEstimatedPay = totalMilesDriven * 0.3;
-                                estimatedPayText = "Estimated Pay: $" + round(totalMilesDriven * 0.3);
+                                estimatedPayText = "Estimated Pay: $" + round(totalMilesDriven * mPay);
                                 binding.textView4.setText(estimatedPayText);
                             } catch (IllegalStateException ise) {
 
@@ -270,7 +275,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                     });
                 }
             };
-            timer.scheduleAtFixedRate(locationTask, 1000, 100);
+            timer.scheduleAtFixedRate(locationTask, 300, 100);
         }
         else {
             Toast.makeText(getContext(), "Map failed to load.", Toast.LENGTH_SHORT).show();
@@ -281,7 +286,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     }
 
     public void resetTrip() {
-        timerTextView = (TextView) binding.TimerClock;
+        timerTextView = binding.TimerClock;
         AlertDialog.Builder resetAlert = new AlertDialog.Builder(requireActivity());
         resetAlert.setTitle("Reset Time");
         resetAlert.setMessage("Are you sure you want to reset your time?");

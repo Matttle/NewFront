@@ -24,13 +24,22 @@
             android:id="@+id/btnApply"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:layout_gravity="end|center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/ic_check_foreground"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@color/colorDarkGreen"
             android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/ApplyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apply"
+            android:layout_gravity="end"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/toolbarTitle"
@@ -62,7 +71,7 @@
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter your new name"/>
+                android:hint="Enter your name"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -74,6 +83,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter your new email"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pay per mile"/>
+
+            <EditText
+                android:id="@+id/editTextPay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your pay per mile"/>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -167,9 +187,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Sign Out"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/red_600"
                 android:id="@+id/btnSignOut"
-                android:textColor="#FF4B4B"/>
+                android:textColor="@color/white"/>
 
         </LinearLayout>
     </ScrollView>
