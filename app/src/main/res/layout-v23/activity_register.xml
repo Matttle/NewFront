@@ -112,7 +112,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/to_register"
         style="@style/FirebaseUI.Button"
-        android:layout_width="320dp"
+        android:layout_width="393dp"
         android:layout_height="79dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -131,6 +131,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginCard"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/guestTxt"
+        android:layout_width="120dp"
+        android:layout_height="23dp"
+        android:text="@string/continue_as_guest"
+        android:textColor="@color/grey_500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.876" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

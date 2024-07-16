@@ -35,8 +35,16 @@ public class ProfileActivity extends AppCompatActivity {
     public static double mPay = 0.00000001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mName = currentUser.getDisplayName();
-        mEmail = currentUser.getEmail();
+        try {
+            mName = currentUser.getDisplayName();
+        } catch (NullPointerException npe) {
+            mName = "Guest";
+        }
+        try {
+            mEmail = currentUser.getEmail();
+        } catch (NullPointerException npe) {
+            mEmail = "Guest@guest.com";
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
