@@ -7,13 +7,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 
+import com.example.myapplication.ui.detention.DetentionActivity;
+import com.example.myapplication.ui.profile.ProfileActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -51,10 +55,13 @@ public class Register extends AppCompatActivity {
         EditText email = findViewById(R.id.email);
         EditText password = findViewById(R.id.password);
         EditText conpassword = findViewById(R.id.conpassword);
+        TextView guest = findViewById(R.id.guestTxt);
 
         MaterialButton registerbtn = findViewById(R.id.to_register);
 
-
+        guest.setOnClickListener(v -> {
+            startActivity(new Intent(Register.this, MainActivity.class));
+        });
         registerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

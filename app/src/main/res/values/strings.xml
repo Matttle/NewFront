@@ -36,4 +36,5 @@
     <string name="userName">Matt L</string>
     <string name="emailPattern">[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+</string>
     <string name="milesDriven">Miles Driven: 0</string>
+    <string name="continue_as_guest"><b><u>Continue as Guest?</u></b></string>
 </resources>
