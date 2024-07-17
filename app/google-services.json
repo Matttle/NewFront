@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "549593715235",
-    "project_id": "newfront-a0881",
-    "storage_bucket": "newfront-a0881.appspot.com"
+    "project_number": "204799601786",
+    "project_id": "newfront-96b5b",
+    "storage_bucket": "newfront-96b5b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:549593715235:android:68e0e5473e451673ad9796",
+        "mobilesdk_app_id": "1:204799601786:android:df76dce713c31c6ff2dfc3",
         "android_client_info": {
           "package_name": "com.example.myapplication"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAT_QAuWx4ar8_11XUn-6O-NTt2kDiCKxo"
+          "current_key": "AIzaSyBZ49FpUVii-hhthZ8hWCO9iM_laUiku2A"
         }
       ],
       "services": {
