@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
-import android.widget.DatePicker;
+//import android.widget.DatePicker;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
@@ -16,17 +16,26 @@ import com.example.myapplication.ui.profile.ProfileActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;
-import java.util.Timer;
+import java.util.Locale;
+import java.util.Objects;
+//import java.util.Timer;
+
+//Moved to remove warnings, line 45
+//atePicker datePicker;
+//String day;
+//String month;
+//String year;
+//line 57
+//datePicker = findViewById(R.id.datePicker);
+//day = intToString(datePicker.getDayOfMonth());
+//month = intToString(datePicker.getMonth());
+//year = intToString(datePicker.getYear());
 
 public class DetentionActivity extends AppCompatActivity {
 
-    private androidx.appcompat.widget.Toolbar username;
+    //private androidx.appcompat.widget.Toolbar username;
     private TextInputEditText startTimeInput;
     private TextInputEditText endTimeInput;
-    private DatePicker datePicker;
-    private String day;
-    private String month;
-    private String year;
     public static String companyTextString = "";
     public static String startTimeTextString = "";
     public static String endTimeTextString = "";
@@ -45,11 +54,6 @@ public class DetentionActivity extends AppCompatActivity {
         companyInput.setText(companyTextString);
         startTimeInput.setText(startTimeTextString);
         endTimeInput.setText(endTimeTextString);
-
-        datePicker = findViewById(R.id.datePicker);
-        day = intToString(datePicker.getDayOfMonth());
-        month = intToString(datePicker.getMonth());
-        year = intToString(datePicker.getYear());
 
         startTimeInput.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
@@ -71,7 +75,7 @@ public class DetentionActivity extends AppCompatActivity {
                             }
                         }
 
-                        String selectedTime = hourOfDay + ":" + String.format("%02d", minute) + " " + period;
+                        String selectedTime = hourOfDay + ":" + String.format(Locale.US,"%02d", minute) + " " + period;
                         startTimeInput.setText(selectedTime);
                     }, hour, minute, false);
 
@@ -99,7 +103,7 @@ public class DetentionActivity extends AppCompatActivity {
                             }
                         }
 
-                        String selectedTime = hourOfDay + ":" + String.format("%02d", minute) + " " + period;
+                        String selectedTime = hourOfDay + ":" + String.format(Locale.US, "%02d", minute) + " " + period;
                         endTimeInput.setText(selectedTime);
                     }, hour, minute, false);
 
@@ -124,9 +128,9 @@ public class DetentionActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menuAction1) {
-            companyTextString = companyInput.getText().toString();
-            startTimeTextString = startTimeInput.getText().toString();
-            endTimeTextString = endTimeInput.getText().toString();
+            companyTextString = Objects.requireNonNull(companyInput.getText()).toString();
+            startTimeTextString = Objects.requireNonNull(startTimeInput.getText()).toString();
+            endTimeTextString = Objects.requireNonNull(endTimeInput.getText()).toString();
             startActivity(new Intent(DetentionActivity.this, MainActivity.class));
             return true;
         } else if (item.getItemId() == R.id.menuAction2) {
@@ -137,9 +141,9 @@ public class DetentionActivity extends AppCompatActivity {
             return true;
         } else if (item.getItemId() == R.id.Profile) {
             fromDetention = true;
-            companyTextString = companyInput.getText().toString();
-            startTimeTextString = startTimeInput.getText().toString();
-            endTimeTextString = endTimeInput.getText().toString();
+            companyTextString = Objects.requireNonNull(companyInput.getText()).toString();
+            startTimeTextString = Objects.requireNonNull(startTimeInput.getText()).toString();
+            endTimeTextString = Objects.requireNonNull(endTimeInput.getText()).toString();
             startActivity(new Intent(DetentionActivity.this, ProfileActivity.class));
             return true;
         } else {
@@ -147,9 +151,4 @@ public class DetentionActivity extends AppCompatActivity {
         }
     }
 
-    public String intToString(int intToConvert) {
-        String intConverted;
-        intConverted = String.valueOf(intToConvert);
-        return intConverted;
-    }
 }

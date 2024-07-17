@@ -4,36 +4,36 @@ import static com.example.myapplication.ui.auth.LoginActivity.displayName;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+//import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
-import android.widget.TextView;
+//import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
+//import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.myapplication.databinding.ActivityMainBinding;
-import com.example.myapplication.ui.dashboard.DashboardFragment;
+//import com.example.myapplication.ui.dashboard.DashboardFragment;
 import com.example.myapplication.ui.detention.DetentionActivity;
 import com.example.myapplication.ui.profile.ProfileActivity;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+//import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
-    public static androidx.appcompat.widget.Toolbar myToolbar;
+    public androidx.appcompat.widget.Toolbar myToolbar;
     public static boolean fromMain = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityMainBinding binding;
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, ProfileActivity.class));
         });
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(

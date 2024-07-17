@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+//import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.Button;
@@ -30,7 +31,9 @@ import com.example.myapplication.R;
 import com.example.myapplication.ui.profile.ProfileActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class PaymentActivity extends AppCompatActivity {
 
@@ -43,9 +46,6 @@ public class PaymentActivity extends AppCompatActivity {
     public static CardView expenseCardView;
     private EditText editTextDescription, editTextAmount;
     private DatePicker datePicker;
-    private FloatingActionButton fabAdd;
-    private TextView saveButton;
-    private TextView cancelButton;
     public LinearLayout blockContainer;
     public ScrollView scrollView;
     public static ArrayList<View> blockViews;
@@ -56,6 +56,9 @@ public class PaymentActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+        FloatingActionButton fabAdd;
+        TextView saveButton;
+        TextView cancelButton;
 
         fabAdd = findViewById(R.id.fabAdd);
         saveButton = findViewById(R.id.save);
@@ -123,14 +126,14 @@ public class PaymentActivity extends AppCompatActivity {
         String amount = editTextAmount.getText().toString();
         String date = getDateFromDatePicker(datePicker);
 
-        View blockView = getLayoutInflater().inflate(R.layout.payment_block, null);
+        View blockView = getLayoutInflater().inflate(R.layout.payment_block, getContentScene().getSceneRoot());
         TextView textViewDescription = blockView.findViewById(R.id.blockDescription);
         TextView textViewAmount = blockView.findViewById(R.id.blockAmount);
         TextView textViewDate = blockView.findViewById(R.id.blockDate);
         ImageView imageViewDelete = blockView.findViewById(R.id.blockDelete);
 
         textViewDescription.setText(description);
-        textViewAmount.setText("$" + amount);
+        textViewAmount.setText(MessageFormat.format("${0}", amount));
         textViewDate.setText(date);
 
         try {
@@ -170,7 +173,7 @@ public class PaymentActivity extends AppCompatActivity {
             blockContainer.removeAllViews();
             blockViews.clear();
         } catch (NullPointerException npe) {
-
+            Toast.makeText(this, "Null Pointer Exception", Toast.LENGTH_SHORT).show();
         }
 
         for (int i = 0; i < blockCount; i++) {
@@ -178,7 +181,7 @@ public class PaymentActivity extends AppCompatActivity {
             String amount = preferences.getString("blockAmount" + i, "");
             String date = preferences.getString("blockDate" + i, "");
 
-            View blockView = getLayoutInflater().inflate(R.layout.payment_block, null);
+            View blockView = getLayoutInflater().inflate(R.layout.payment_block, getContentScene().getSceneRoot());
             TextView textViewDescription = blockView.findViewById(R.id.blockDescription);
             TextView textViewAmount = blockView.findViewById(R.id.blockAmount);
             TextView textViewDate = blockView.findViewById(R.id.blockDate);
@@ -194,7 +197,7 @@ public class PaymentActivity extends AppCompatActivity {
                     textViewAmount.setTextColor(Color.rgb(255, 140, 140));
                 }
             } catch (NumberFormatException nfe) {
-
+                Toast.makeText(this, "Number Format Exception", Toast.LENGTH_SHORT).show();
             }
             textViewDate.setText(date);
 
@@ -210,7 +213,7 @@ public class PaymentActivity extends AppCompatActivity {
                 blockContainer.addView(blockView, 0);
                 blockViews.add(blockView);
             } catch (NullPointerException npe) {
-
+                Toast.makeText(this, "Number Pointer Exception", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -246,7 +249,7 @@ public class PaymentActivity extends AppCompatActivity {
                     revenue += amountValue;
                 }
             } catch (NumberFormatException nfe) {
-
+                Toast.makeText(this, "Number Format Exception", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -262,7 +265,7 @@ public class PaymentActivity extends AppCompatActivity {
                     expenses += amountValue;
                 }
             } catch (NumberFormatException nfe) {
-
+                Toast.makeText(this, "Number Format Exception", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -282,7 +285,7 @@ public class PaymentActivity extends AppCompatActivity {
         int month = datePicker.getMonth() + 1; // month starts at 0 so +1 is normal
         int year = datePicker.getYear();
 
-        return String.format("%02d/%02d/%d", month, day, year);
+        return String.format(Locale.US, "%02d/%02d/%d", month, day, year);
     }
 
     public class TransitionCardView extends Animation {
@@ -302,8 +305,7 @@ public class PaymentActivity extends AppCompatActivity {
 
         @Override
         protected void applyTransformation(float interpolatedTime, Transformation t) {
-            int newHeight = (int) (initialHeight + (targetHeight - initialHeight) * interpolatedTime);
-            cardView.getLayoutParams().height = newHeight;
+            cardView.getLayoutParams().height = (int) (initialHeight + (targetHeight - initialHeight) * interpolatedTime);
             cardView.requestLayout();
 
             if (!expanding) {

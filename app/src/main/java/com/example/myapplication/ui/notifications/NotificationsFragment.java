@@ -1,7 +1,5 @@
 package com.example.myapplication.ui.notifications;
 
-import static com.example.myapplication.MainActivity.myToolbar;
-import static com.example.myapplication.ui.auth.LoginActivity.displayName;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

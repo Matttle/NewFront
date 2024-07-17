@@ -75,20 +75,16 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(new Intent(ProfileActivity.this, PaymentActivity.class));
         });
 
-        themeBtn.setOnClickListener(v -> {
-            showThemeSelectionDialog();
-        });
+        themeBtn.setOnClickListener(v -> showThemeSelectionDialog());
 
-        themeArrow.setOnClickListener(v -> {
-            showThemeSelectionDialog();
-        });
+        themeArrow.setOnClickListener(v -> showThemeSelectionDialog());
 
         back.setOnClickListener(v -> {
-            if (fromMain == true) {
+            if (fromMain) {
                 fromMain = false;
                 startActivity(new Intent(ProfileActivity.this, MainActivity.class));
             }
-            if (fromDetention == true) {
+            if (fromDetention) {
                 fromDetention = false;
                 startActivity(new Intent(ProfileActivity.this, DetentionActivity.class));
             }
@@ -96,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         apply.setOnClickListener(v -> {
             mName = name.getText().toString();
-            if (pay.getText().toString() == "")
+            if (pay.getText().toString().equals(""))
                 mPay = 0;
             else {
                 try {
