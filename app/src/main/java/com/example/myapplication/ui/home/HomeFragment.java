@@ -98,8 +98,8 @@ public class HomeFragment extends Fragment {
         if (binding.expenses.getText().toString().equals("$0.0"))
             binding.expenses.setText(revenue);
 
-        if (timeDriven == "0:00:00") {
-
+        if (Objects.equals(timeDriven, null)) {
+            binding.timeDriven.setText("0:00:00");
         }
         else
             binding.timeDriven.setText(timeDriven);
