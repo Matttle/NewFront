@@ -9,6 +9,7 @@ import static com.example.myapplication.ui.dashboard.DashboardFragment.totalEsti
 import static com.example.myapplication.ui.payment.PaymentActivity.expenses;
 import static com.example.myapplication.ui.payment.PaymentActivity.revenue;
 import static com.example.myapplication.ui.profile.ProfileActivity.mName;
+import static com.example.myapplication.ui.dashboard.DashboardFragment.timeDriven;
 
 import android.content.Intent;
 //import android.content.SharedPreferences;
@@ -85,7 +86,7 @@ public class HomeFragment extends Fragment {
         double profit = round(Double.parseDouble(binding.revenue.getText().toString().replaceAll("[^\\d.]+", "")) - Double.parseDouble(binding.expenses.getText().toString().replaceAll("[^\\d.]+", "")));
 
         if (profit == 0)
-            binding.profit.setText(MessageFormat.format("${0}0", profit));
+            binding.profit.setText(MessageFormat.format("${0}", profit));
         else
             binding.profit.setText(MessageFormat.format("${0}", profit));
 
@@ -96,6 +97,12 @@ public class HomeFragment extends Fragment {
 
         if (binding.expenses.getText().toString().equals("$0.0"))
             binding.expenses.setText(revenue);
+
+        if (timeDriven == "0:00:00") {
+
+        }
+        else
+            binding.timeDriven.setText(timeDriven);
 
         return root;
     }

@@ -78,6 +78,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     public static double mEstimatedPay;
     public static double totalEstimatedPay;
     public static boolean milesVisible = false;
+    public static String timeDriven;
 
     public static double time = 0.0;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -204,6 +205,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 binding.textView4.setText(pay);
                 mEstimatedPay = 0;
                 totalMilesDriven = 0;
+                timeDriven = getTimerText();
             }
             );
 
@@ -253,8 +255,8 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                             mEstimatedPay = totalMilesDriven * 0.3;
                             estimatedPayText = "Estimated Pay: $" + round(totalMilesDriven * mPay);
                             binding.textView4.setText(estimatedPayText);
-                        } catch (IllegalStateException ise) {
-                            Toast.makeText(getContext(), "Illegal State Exception", Toast.LENGTH_SHORT).show();
+                        } catch (IllegalStateException ignored) {
+
                         }
                     });
                 }

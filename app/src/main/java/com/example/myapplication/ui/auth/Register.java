@@ -50,7 +50,6 @@ public class Register extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-
         EditText fullname = findViewById(R.id.fullname);
         EditText email = findViewById(R.id.email);
         EditText password = findViewById(R.id.password);
@@ -60,6 +59,7 @@ public class Register extends AppCompatActivity {
         MaterialButton registerbtn = findViewById(R.id.to_register);
 
         guest.setOnClickListener(v -> startActivity(new Intent(Register.this, MainActivity.class)));
+
         registerbtn.setOnClickListener(view -> {
             String nameTxt = fullname.getText().toString();
             String emailTxt = email.getText().toString();
